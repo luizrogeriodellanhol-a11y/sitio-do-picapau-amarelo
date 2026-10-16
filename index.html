@@ -50,7 +50,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
       <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Por aqui você pode conhecer os personagens, descobrir quem dá vida a eles, brincar com um quiz e guardar um pedacinho dessa experiência. Algumas informações ainda serão preenchidas quando os detalhes da peça forem definidos.</p></article>
       <article class="paper-card notice"><h3>Diário da culminância</h3><div class="notice-list">
         <div class="notice-row"><div class="notice-icon">📅</div><div><strong>Data da apresentação</strong><small id="eventDate">Em breve — data a confirmar</small></div></div>
-        <div class="notice-row" id="eventTimeRow" hidden><div class="notice-icon">🕒</div><div><strong>Horário da apresentação</strong><small id="eventTime"></small></div></div>
+        <div class="notice-row" id="eventTimeRow" style="display:none"><div class="notice-icon">🕒</div><div><strong>Horário da apresentação</strong><small id="eventTime"></small></div></div>
         <div class="notice-row"><div class="notice-icon">🎭</div><div><strong>Elenco e equipe</strong><small>Conheça as pessoas por trás da magia.</small></div></div>
         <div class="notice-row"><div class="notice-icon">📍</div><div><strong>Local do evento</strong><small id="eventPlace">A confirmar pela escola</small></div></div>
       </div></article>
@@ -150,7 +150,7 @@ async function carregarInformacoesDoPainel(){
     update("eventPlace",data.event_location);
     if(typeof data.event_time==="string"&&data.event_time.trim()){
       update("eventTime",data.event_time);
-      document.getElementById("eventTimeRow").hidden=false;
+      document.getElementById("eventTimeRow").style.display="flex";
     }
   } catch(e) {
     // Mantém o conteúdo provisório se o servidor estiver indisponível.
