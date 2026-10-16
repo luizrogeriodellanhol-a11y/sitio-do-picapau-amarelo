@@ -47,9 +47,10 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
   <div class="wrap">
     <div class="section-head"><div><div class="kicker">Entre, a casa é sua</div><h2>Tem sempre uma aventura esperando.</h2></div><p>Este cantinho foi criado pela nossa turma para celebrar teatro, imaginação e as histórias que ganham vida quando estamos juntos.</p></div>
     <div class="intro-grid">
-      <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p>Por aqui você pode conhecer os personagens, descobrir quem dá vida a eles, brincar com um quiz e guardar um pedacinho dessa experiência. Algumas informações ainda serão preenchidas quando os detalhes da peça forem definidos.</p></article>
+      <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Por aqui você pode conhecer os personagens, descobrir quem dá vida a eles, brincar com um quiz e guardar um pedacinho dessa experiência. Algumas informações ainda serão preenchidas quando os detalhes da peça forem definidos.</p></article>
       <article class="paper-card notice"><h3>Diário da culminância</h3><div class="notice-list">
         <div class="notice-row"><div class="notice-icon">📅</div><div><strong>Data da apresentação</strong><small id="eventDate">Em breve — data a confirmar</small></div></div>
+        <div class="notice-row" id="eventTimeRow" hidden><div class="notice-icon">🕒</div><div><strong>Horário da apresentação</strong><small id="eventTime"></small></div></div>
         <div class="notice-row"><div class="notice-icon">🎭</div><div><strong>Elenco e equipe</strong><small>Conheça as pessoas por trás da magia.</small></div></div>
         <div class="notice-row"><div class="notice-icon">📍</div><div><strong>Local do evento</strong><small id="eventPlace">A confirmar pela escola</small></div></div>
       </div></article>
@@ -65,7 +66,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 <section id="historia">
   <div class="wrap story-grid">
     <div class="book-illustration" role="img" aria-label="Ilustração decorativa de um livro mágico"><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✿</span><div class="open-book">📖</div></div>
-    <div class="story-copy"><div class="kicker">Era uma vez...</div><h2>Uma história que ainda está sendo escrita.</h2><p>O enredo oficial da nossa peça será colocado aqui quando a turma definir a adaptação e os acontecimentos da apresentação.</p><p>Enquanto isso, este espaço apresenta o propósito do projeto: celebrar a imaginação, a leitura, o trabalho coletivo e a magia de contar histórias no palco.</p><div class="paper-card"><strong>Nota da produção</strong><p style="margin:8px 0 0">Texto provisório — substitua este conteúdo pelo resumo oficial. Evite publicar spoilers que tirem a surpresa de quem vai assistir!</p></div></div>
+    <div class="story-copy"><div class="kicker">Era uma vez...</div><h2>Uma história que ainda está sendo escrita.</h2><p id="storySynopsis">O enredo oficial da nossa peça será colocado aqui quando a turma definir a adaptação e os acontecimentos da apresentação.</p><p>Enquanto isso, este espaço apresenta o propósito do projeto: celebrar a imaginação, a leitura, o trabalho coletivo e a magia de contar histórias no palco.</p><div class="paper-card"><strong>Nota da produção</strong><p style="margin:8px 0 0">Texto provisório — substitua este conteúdo pelo resumo oficial. Evite publicar spoilers que tirem a surpresa de quem vai assistir!</p></div></div>
   </div>
 </section>
 <section class="game-section" id="magia">
@@ -136,6 +137,26 @@ const siteContent = {
 };
 document.getElementById("eventDate").textContent=siteContent.eventDate;
 document.getElementById("eventPlace").textContent=siteContent.eventPlace;
+/* Carrega informações públicas do painel, sem expor dados administrativos. */
+async function carregarInformacoesDoPainel(){
+  try {
+    const response=await fetch("/api/site",{headers:{"Accept":"application/json"},cache:"no-store"});
+    if(!response.ok) return;
+    const data=await response.json();
+    const update=(id,value)=>{if(typeof value==="string"&&value.trim()){document.getElementById(id).textContent=value.trim()}};
+    update("welcomeMessage",data.welcome);
+    update("storySynopsis",data.synopsis);
+    update("eventDate",data.event_date);
+    update("eventPlace",data.event_location);
+    if(typeof data.event_time==="string"&&data.event_time.trim()){
+      update("eventTime",data.event_time);
+      document.getElementById("eventTimeRow").hidden=false;
+    }
+  } catch(e) {
+    // Mantém o conteúdo provisório se o servidor estiver indisponível.
+  }
+}
+carregarInformacoesDoPainel();
 document.getElementById("year").textContent="· "+new Date().getFullYear();
 const characterGrid=document.getElementById("characterGrid");
 siteContent.characters.forEach(c=>{
