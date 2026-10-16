@@ -11,10 +11,10 @@ Site da culminância teatral. A página original `index.html` foi preservada.
 Criar **Web Service** Python apontando para este repositório (não alterar outro projeto).
 - Build: `pip install -r requirements.txt`
 - Start: `gunicorn app:app`
-- `DATABASE_URL`: URL interna do PostgreSQL do **novo projeto**
+- `DATABASE_URL`: URL interna do PostgreSQL existente, se reutilizado (as tabelas do Sítio têm prefixo `sitio_`; confirme que não há conflitos).
 - `SECRET_KEY`: string aleatória de no mínimo 32 caracteres
-- `ADMIN_PASSWORD_HASH`: hash gerado localmente com:
-  `python -c "from werkzeug.security import generate_password_hash; import getpass; print(generate_password_hash(getpass.getpass('Senha: ')))"`
+- `ADMIN_PASSWORD`: uma senha exclusiva e forte (guarde apenas no painel de variáveis de ambiente do Render; não compartilhe no chat ou GitHub).
+- Alternativa avançada: `ADMIN_PASSWORD_HASH` com hash do Werkzeug tem prioridade se ambas estiverem configuradas.
 - `COOKIE_SECURE=true` no HTTPS do Render.
 
 **Não publique senhas, hashes ou URLs privadas no GitHub.**
