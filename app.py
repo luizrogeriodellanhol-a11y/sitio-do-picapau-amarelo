@@ -94,9 +94,13 @@ def create_app():
             if not valid_csrf():
                 abort(400)
             stored = os.environ.get("ADMIN_PASSWORD_HASH", "")
-            if not stored:
+            password = os.environ.get("ADMIN_PASSWORD", "")
+            attempt = request.form.get("password", "")
+            if not stored and not password:
                 error = "A senha administrativa ainda não foi configurada."
-            elif check_password_hash(stored, request.form.get("password", "")):
+            elif (stored and check_password_hash(stored, attempt)) or (
+                not stored and password and secrets.compare_digest(password, attempt)
+            ):
                 session.clear()
                 session["admin"] = True
                 session["csrf"] = secrets.token_urlsafe(32)
