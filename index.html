@@ -406,10 +406,38 @@ let quizIndex=0,quizScore=0,quizStarted=false,quizAnswered=false;
 const qQuestion=document.getElementById("quizQuestion"),qAnswers=document.getElementById("quizAnswers"),qFeedback=document.getElementById("quizFeedback"),qProgress=document.getElementById("quizProgress"),qStart=document.getElementById("quizStart");
 function renderQuestion(){quizAnswered=false;const item=siteContent.quiz[quizIndex];qQuestion.textContent=item.q;qAnswers.innerHTML="";item.a.forEach((answer,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=answer;b.addEventListener("click",()=>answerQuestion(i,b));qAnswers.appendChild(b)});qFeedback.textContent="";qProgress.textContent=`Pergunta ${quizIndex+1} de ${siteContent.quiz.length} · Pontos: ${quizScore}`;qStart.textContent="Próxima pergunta";qStart.disabled=true;}
 function answerQuestion(i,button){if(quizAnswered)return;quizAnswered=true;const item=siteContent.quiz[quizIndex];[...qAnswers.children].forEach((b,j)=>{b.disabled=true;if(j===item.correct)b.classList.add("correct")});if(i===item.correct){quizScore++;qFeedback.textContent="Isso mesmo! "+item.why}else{button.classList.add("wrong");qFeedback.textContent=item.why}qProgress.textContent=`Pergunta ${quizIndex+1} de ${siteContent.quiz.length} · Pontos: ${quizScore}`;qStart.disabled=false;}
-qStart.addEventListener("click",()=>{if(!quizStarted){quizStarted=true;quizIndex=0;quizScore=0;qStart.disabled=true;renderQuestion();return}if(!quizAnswered)return;if(quizIndex<siteContent.quiz.length-1){quizIndex++;renderQuestion()}else{qQuestion.textContent=`Você fez ${quizScore} de ${siteContent.quiz.length} pontos!`;qAnswers.innerHTML="";qFeedback.textContent=quizScore===siteContent.quiz.length?"Uma verdadeira enciclopédia do Sítio!":quizScore>=3?"Muito bem! Continue explorando o universo do Sítio.":"Toda aventura é uma chance de aprender algo novo. Tente novamente!";qProgress.textContent="Quiz concluído";qStart.textContent="Jogar novamente";qStart.disabled=false;quizStarted=false;const restart=()=>{quizIndex=0;quizScore=0;quizStarted=true;qStart.removeEventListener("click",restart);renderQuestion()};qStart.addEventListener("click",restart,{once:true})}});
+qStart.addEventListener("click",()=>{
+  if(!quizStarted){
+    quizStarted=true;quizIndex=0;quizScore=0;
+    renderQuestion();
+    return;
+  }
+  if(!quizAnswered)return;
+  if(quizIndex<siteContent.quiz.length-1){
+    quizIndex++;renderQuestion();
+    return;
+  }
+  const finalScore=quizScore;
+  qQuestion.textContent="Você fez "+finalScore+" de "+siteContent.quiz.length+" pontos!";
+  qAnswers.replaceChildren();
+  qFeedback.textContent=finalScore===siteContent.quiz.length?"Uma verdadeira enciclopédia do Sítio!":finalScore>=3?"Muito bem! Continue explorando o universo do Sítio.":"Toda aventura é uma chance de aprender algo novo. Tente novamente!";
+  qProgress.textContent="Quiz concluído";
+  qStart.textContent="Jogar novamente";
+  qStart.disabled=false;
+  quizStarted=false;
+  quizAnswered=false;
+  document.dispatchEvent(new CustomEvent("sitio:conquista",{detail:"quiz"}));
+});
 qStart.textContent="Começar quiz";qStart.disabled=false;
 /* Galeria preparada para receber registros autorizados em breve. */
 const menuToggle=document.getElementById("menuToggle"),navLinks=document.getElementById("navLinks");menuToggle.addEventListener("click",()=>{const open=navLinks.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open))});navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{navLinks.classList.remove("open");menuToggle.setAttribute("aria-expanded","false")}));
+document.addEventListener("keydown",(event)=>{
+  if(event.key==="Escape"&&navLinks.classList.contains("open")){
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded","false");
+    menuToggle.focus();
+  }
+});
 let toastTimer;function showToast(message){const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600)}
 </script>
 </body>
