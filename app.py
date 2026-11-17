@@ -29,7 +29,21 @@ FIELDS = {
     "event_time": "Horário",
     "event_location": "Local",
     "welcome": "Mensagem de boas-vindas",
-    "synopsis": "Sinopse",
+    "synopsis": "Sinopse da história",
+    "credits_cast": "Agradecimentos ao elenco",
+    "credits_orientation": "Agradecimentos à orientação",
+    "credits_production": "Agradecimentos à produção",
+    "actor_0": "Narrador(a) 1 — intérprete",
+    "actor_1": "Narrador(a) 2 — intérprete",
+    "actor_2": "Dona Benta — intérprete",
+    "actor_3": "Tia Nastácia — intérprete",
+    "actor_4": "Narizinho — intérprete",
+    "actor_5": "Pedrinho — intérprete",
+    "actor_6": "Emília — intérprete",
+    "actor_7": "Visconde de Sabugosa — intérprete",
+    "actor_8": "Rabicó — intérprete",
+    "actor_9": "Saci — intérprete",
+    "actor_10": "Cuca — intérprete",
 }
 
 # Valores iniciais do roteiro; configurações já salvas pelo administrador prevalecem.
