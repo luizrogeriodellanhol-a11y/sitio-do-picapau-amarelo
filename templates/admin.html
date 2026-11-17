@@ -13,9 +13,10 @@
 <h2>🌻 Boas-vindas e história</h2><p>Os textos principais da aventura aparecem no site.</p>
 <div class="fields">
 {% for key, label in fields.items() %}
+{% if key == "gallery_title_1" %}</div><h2>📸 Álbum de memórias</h2><p>Inclua links diretos de imagens hospedadas em um endereço público. Use apenas fotos com autorização de divulgação. Deixe vazio até ter fotografias.</p><small>O endereço precisa começar com https:// e abrir a imagem diretamente (não uma página de compartilhamento).</small><div class="fields">{% endif %}
 {% if key == "credits_cast" %}</div><h2>✨ Agradecimentos</h2><p>Reconheça as pessoas que ajudaram a dar vida ao Sítio.</p><div class="fields">{% endif %}
 {% if key == "actor_0" %}</div><h2>🎭 Quem interpreta cada personagem?</h2><p>Deixe os nomes em branco enquanto o elenco não estiver confirmado.</p><div class="fields">{% endif %}
-<div class="field {% if key in ['welcome','synopsis'] or key.startswith('credits_') %}wide{% endif %}">
+<div class="field {% if key in ['welcome','synopsis'] or key.startswith('credits_') or key.startswith('gallery_') %}wide{% endif %}">
 <label for="{{key}}">{{label}}</label>
 {% if key in ["welcome","synopsis"] or key.startswith('credits_') %}<textarea id="{{key}}" name="{{key}}" maxlength="5000">{{values.get(key,"")}}</textarea>
 {% else %}<input id="{{key}}" name="{{key}}" value="{{values.get(key,"")}}" maxlength="5000">{% endif %}
