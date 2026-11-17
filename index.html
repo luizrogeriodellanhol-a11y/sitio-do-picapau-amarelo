@@ -158,9 +158,9 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
   <div class="wrap">
     <div class="section-head"><div><span class="chapter-marker">Capítulo 6</span><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. As lembranças da apresentação vão fazer parte deste livro encantado.</p></div>
     <div class="gallery-grid">
-      <article class="paper-card gallery-tile"><span class="big-emoji">🎬</span><h3>Bastidores</h3><p>Os preparativos e os ensaios da turma.</p></article>
-      <article class="paper-card gallery-tile"><span class="big-emoji">🎨</span><h3>Cenários e figurinos</h3><p>As ideias que deram vida ao palco.</p></article>
-      <article class="paper-card gallery-tile"><span class="big-emoji">🌟</span><h3>Dia da apresentação</h3><p>Os registros da nossa culminância.</p></article>
+      <article class="paper-card gallery-tile" data-gallery-slot="1"><span class="big-emoji">🎬</span><h3>Bastidores</h3><p>Os preparativos e os ensaios da turma.</p></article>
+      <article class="paper-card gallery-tile" data-gallery-slot="2"><span class="big-emoji">🎨</span><h3>Cenários e figurinos</h3><p>As ideias que deram vida ao palco.</p></article>
+      <article class="paper-card gallery-tile" data-gallery-slot="3"><span class="big-emoji">🌟</span><h3>Dia da apresentação</h3><p>Os registros da nossa culminância.</p></article>
     </div>
     <div class="paper-card gallery-note">🌟 Novas lembranças mágicas chegarão aqui. Continue explorando os capítulos e descobrindo segredos!</div>
   </div>
@@ -230,6 +230,25 @@ async function carregarInformacoesDoPainel(){
     document.querySelectorAll("#characterGrid .actor strong").forEach((element,i)=>{
       const actor=data["actor_"+i];
       if(typeof actor==="string"&&actor.trim())element.textContent=actor.trim();
+    });
+    document.querySelectorAll("[data-gallery-slot]").forEach((card)=>{
+      const number=card.dataset.gallerySlot;
+      const url=data["gallery_url_"+number];
+      const title=data["gallery_title_"+number];
+      const heading=card.querySelector("h3");
+      if(typeof title==="string"&&title.trim()&&heading)heading.textContent=title.trim();
+      if(typeof url!=="string"||!url.trim())return;
+      try{
+        const verified=new URL(url.trim());
+        if(verified.protocol!=="https:"||verified.username||verified.password)return;
+        const img=document.createElement("img");
+        img.src=verified.href;
+        img.alt=(heading?.textContent||"Lembrança do Sítio");
+        img.loading="lazy";img.decoding="async";img.referrerPolicy="no-referrer";
+        img.addEventListener("load",()=>card.classList.add("has-photo"));
+        img.addEventListener("error",()=>img.remove());
+        card.prepend(img);
+      }catch(e){/* Mantém os cartões ilustrados caso o link seja inválido. */}
     });
     if(typeof data.event_time==="string"&&data.event_time.trim()){
       update("eventTime",data.event_time);
