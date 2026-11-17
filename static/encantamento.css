@@ -1,0 +1,80 @@
+
+/* Capítulos encantados — componentes interativos da experiência */
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid #edb948;outline-offset:4px}
+body.gate-open{overflow:hidden}
+.book-gate{position:fixed;inset:0;z-index:110;background:radial-gradient(circle at 50% 38%,#4a7251 0%,#153626 78%);display:grid;place-items:center;overflow:auto;padding:22px;text-align:center;color:#fff7de}
+.book-gate:before{content:"✦    ✧    ✦    ✧   ✦";position:absolute;top:8%;left:0;right:0;color:#e8c36b;font-size:clamp(2rem,5vw,4rem);letter-spacing:4vw;animation:magic-drift 8s ease-in-out infinite;pointer-events:none}
+.book-gate-inner{position:relative;max-width:680px;width:100%;display:flex;align-items:center;flex-direction:column;gap:18px}
+.book-cover{position:relative;width:min(350px,85vw);min-height:390px;border-radius:7px 26px 26px 7px;border:8px double #d9b66b;background:linear-gradient(120deg,#123f30,#2f6644 65%,#194a35);box-shadow:inset 18px 0 25px #092a2233,14px 18px 0 #d1c096,22px 24px 30px #071f17b0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 24px;transform:perspective(900px) rotateY(-9deg);transition:transform .8s ease,opacity .6s}
+.book-cover:before,.book-cover:after{content:"❧";font-size:2rem;color:#ecc36b;display:block}
+.book-cover h2{color:#fff4cf;font-size:clamp(2rem,6vw,2.75rem);line-height:1.08;margin:14px 0}
+.book-cover p{font-family:Georgia,serif;color:#f5e3b5;margin:12px 0}
+.book-cover .cover-badge{font-size:3.7rem;filter:drop-shadow(0 2px 6px #0a271b)}
+.book-gate-intro{max-width:480px;color:#f7edce;font-size:1.05rem;margin:0}
+.book-gate-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.book-open-btn,.book-skip-btn{border-radius:999px;padding:13px 22px;min-height:48px;font-weight:800;border:2px solid #e6c477}
+.book-open-btn{background:#f3d078;color:#234432;box-shadow:0 5px 0 #b79043}
+.book-open-btn:hover{transform:translateY(-2px)}
+.book-skip-btn{background:transparent;color:#fff1cd}
+.book-gate.is-opening .book-cover{transform:perspective(900px) rotateY(-75deg) scale(.9);opacity:0}
+.book-gate.is-opening{animation:gate-disappear .75s ease forwards}
+@keyframes gate-disappear{70%{opacity:1}100%{opacity:0;visibility:hidden}}
+@keyframes magic-drift{50%{transform:translateY(15px);opacity:.5}}
+.magic-tools{position:fixed;right:16px;bottom:16px;z-index:35;display:flex;align-items:center;gap:8px;padding:8px;border:2px solid #e5c879;border-radius:999px;background:#fff9ebf2;box-shadow:0 8px 28px #1b3b2a33;backdrop-filter:blur(8px)}
+.magic-tools button{border:0;border-radius:999px;padding:10px 13px;min-height:42px;background:#2c5d40;color:white;font-weight:700;font-size:.88rem}
+.magic-tools button:hover{background:#1d4732}
+.magic-tools label{font-size:.75rem;color:#345c41;font-weight:700}
+.magic-tools input[type=range]{width:68px;accent-color:#376b48}
+.quest-popover{position:fixed;bottom:88px;right:16px;z-index:34;width:min(350px,calc(100vw - 32px));background:#fff8e8;border:2px solid #c99d55;border-radius:18px;padding:22px;box-shadow:0 15px 55px #1c402c45}
+.quest-popover h2{color:#244b38;font-size:1.4rem;margin:0 0 4px}
+.quest-popover p{margin:0 0 10px;color:#67573d}
+.quest-stamps{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+.quest-stamps li{display:flex;align-items:center;gap:10px;border:1px solid #e6d7b4;border-radius:12px;padding:8px 10px;color:#604d37}
+.quest-stamps li.is-found{background:#e5f0dd;border-color:#8ab278;color:#244b38}
+.quest-stamps .stamp-icon{font-size:1.45rem;filter:grayscale(1);opacity:.6}
+.quest-stamps li.is-found .stamp-icon{filter:none;opacity:1}
+.quest-close{background:#315f40;color:white;border:0;border-radius:10px;padding:9px 12px;cursor:pointer}
+.collect-stamp{position:absolute;right:18px;top:17px;z-index:3;min-width:48px;min-height:48px;background:#fff8e3;border:2px dashed #bd9a4b;border-radius:50%;box-shadow:0 4px 18px #1b3b2a30;font-size:1.5rem;transition:transform .2s;cursor:pointer}
+.collect-stamp:hover{transform:scale(1.12) rotate(-8deg)}
+.collect-stamp.is-found{background:#dbeacc;border-style:solid}
+.hero,.welcome-card,.story-copy,.adventure{position:relative}
+.story-copy .collect-stamp{top:-30px;right:0}
+.section-chapter{font-size:.73rem;letter-spacing:.16em;color:#9b7334;font-weight:800;text-transform:uppercase;margin-bottom:10px;display:inline-block}
+.chapter-ribbon{position:absolute;top:14px;left:calc(50% - 50px);opacity:.08;font-size:6rem;pointer-events:none}
+.adventure{background:linear-gradient(130deg,#f7e9c7,#e9eacb);padding-top:74px}
+.adventure .section-head h2{color:#254d38}
+.adventure-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.adventure-map{min-height:405px;border:8px solid #d7b778;border-radius:30px;position:relative;overflow:hidden;background:radial-gradient(circle at 20% 20%,#f6e6ad 0 8%,transparent 9%),radial-gradient(circle at 85% 80%,#c1d79e 0 15%,transparent 16%),radial-gradient(circle at 35% 75%,#a9c68d 0 22%,transparent 23%),linear-gradient(140deg,#e8e1ab,#b5d09a);box-shadow:inset 0 0 40px #69835733,0 12px 30px #1e3b2a14}
+.adventure-map:before{content:"";position:absolute;top:8%;left:43%;width:45%;height:88%;border:10px dashed #e8cb8e;border-left-color:transparent;border-top-color:transparent;border-radius:50%;transform:rotate(25deg);opacity:.85;pointer-events:none}
+.adventure-map:after{content:"✿  ❧  ✦  ❧  ✿";position:absolute;bottom:12px;left:16px;right:16px;text-align:center;color:#5a8a5d;letter-spacing:12px;opacity:.7;pointer-events:none}
+.map-place{position:absolute;z-index:1;width:110px;min-height:95px;border:2px solid #8f844c;border-radius:21px;background:#fff7dded;color:#31533b;display:grid;gap:4px;place-items:center;padding:9px;box-shadow:0 7px 0 #a7a27755;transition:transform .2s,background .2s;font-weight:bold;font-size:.82rem}
+.map-place span{font-size:2.35rem;line-height:1}
+.map-place:hover,.map-place[aria-pressed=true]{transform:translateY(-5px);background:#fff2b6;border-color:#a77a36}
+.map-place[data-place=house]{top:16%;left:9%}
+.map-place[data-place=kitchen]{top:14%;right:8%}
+.map-place[data-place=forest]{bottom:13%;left:10%}
+.map-place[data-place=path]{bottom:16%;right:8%}
+.map-info{padding:30px;background:#fffdf5;border:2px solid #e8d2a4;border-radius:24px;display:flex;flex-direction:column;justify-content:center}
+.map-info .map-icon{font-size:3.5rem;margin-bottom:12px}
+.map-info h3{font-size:1.7rem;color:#254b37;margin-bottom:10px}
+.map-info p{color:#655741}
+.map-info .map-hint{font-size:.85rem;color:#78684d}
+.magic-memory{margin-top:20px;border-radius:22px;background:#fff7e6;padding:28px;color:#244b38}
+.magic-memory h3{font-size:1.55rem;margin-bottom:5px}
+.memory-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.memory-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:520px}
+.memory-card{aspect-ratio:1;border:2px solid #9c804d;border-radius:13px;background:linear-gradient(130deg,#28533d,#386e4d);color:#ffe4a8;font-size:clamp(1.2rem,4vw,2.2rem);font-weight:bold;box-shadow:0 4px 0 #153b27;display:grid;place-items:center;transition:transform .2s,background .2s;min-height:58px}
+.memory-card:hover:not(:disabled){transform:translateY(-3px)}
+.memory-card.is-up{background:#f5e4aa;color:#284c35}
+.memory-card.is-matched{background:#cae3bd;color:#244c37;border-color:#4d8b5c}
+.memory-card:disabled{cursor:default}
+.memory-restart{border-radius:12px;border:0;background:#2d5b3e;color:white;padding:11px 16px;font-weight:bold}
+.memory-status{min-height:26px;margin:0;color:#365e41;font-weight:bold}
+.funfact-btn{border:1px solid #63896d;background:#e9f0df;border-radius:999px;padding:9px 12px;color:#234e36;font-weight:bold;width:100%;text-align:center;margin-top:12px}
+.funfact{padding:12px;margin:10px 0 0;background:#f7eac4;border-radius:12px;color:#55452c;font-size:.92rem}
+.gallery-note{padding:20px 24px;margin-top:20px;background:#fffdf6;text-align:center;color:#4b604a}
+.magic-prompt{font-size:.86rem;color:#47634a;font-weight:bold;margin:0}
+@media(max-width:850px){.adventure-layout{grid-template-columns:1fr}.adventure-map{min-height:370px}.map-info{min-height:210px}}
+@media(max-width:620px){.book-cover{min-height:340px}.book-cover h2{font-size:2rem}.book-gate-intro{font-size:.95rem}.magic-tools{right:8px;left:8px;bottom:8px;justify-content:center;border-radius:18px}.magic-tools label{display:none}.quest-popover{right:8px;bottom:84px}.map-place{width:94px;min-height:84px;font-size:.7rem}.map-place span{font-size:2rem}.adventure-map{min-height:350px}.memory-board{gap:7px}.magic-memory{padding:20px}}
+@media(prefers-reduced-motion:reduce){.book-cover,.book-gate,.collect-stamp,.map-place,.memory-card{animation:none!important;transition:none!important}}
