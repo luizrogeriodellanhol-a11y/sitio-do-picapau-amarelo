@@ -24,6 +24,10 @@ class AuditLog(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
 FIELDS = {
+    "play_title": "Título da peça",
+    "school_year": "Turma",
+    "duration": "Duração prevista",
+    "genre": "Gênero da peça",
     "event_date": "Data do espetáculo",
     "event_time": "Horário",
     "event_location": "Local",
