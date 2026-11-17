@@ -35,6 +35,15 @@ FIELDS = {
     "synopsis": "Sinopse",
 }
 
+# Valores iniciais do roteiro; configurações já salvas pelo administrador prevalecem.
+DEFAULT_FIELD_VALUES = {
+    "play_title": "O Sítio do Picapau Amarelo",
+    "school_year": "6º ano",
+    "duration": "30–40 minutos",
+    "genre": "Comédia · Aventura · Fantasia",
+    "synopsis": "Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?",
+}
+
 def create_app():
     app = Flask(__name__, template_folder=str(BASE / "templates"))
     secret = os.environ.get("SECRET_KEY")
@@ -134,7 +143,7 @@ def create_app():
             db.session.add(AuditLog(action="Atualização das informações do espetáculo"))
             db.session.commit()
             notice = "Informações salvas."
-        values = {s.key: s.value for s in Setting.query.all()}
+        values = {**DEFAULT_FIELD_VALUES, **{s.key: s.value for s in Setting.query.all()}}
         return render_template("admin.html", login=False, csrf=session["csrf"], fields=FIELDS, values=values, notice=notice)
 
     @app.post("/admin/logout")
