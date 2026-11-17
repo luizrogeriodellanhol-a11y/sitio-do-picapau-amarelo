@@ -30,6 +30,12 @@ FIELDS = {
     "event_location": "Local",
     "welcome": "Mensagem de boas-vindas",
     "synopsis": "Sinopse da história",
+    "gallery_title_1": "Bastidores — título da foto",
+    "gallery_url_1": "Bastidores — link direto da imagem HTTPS",
+    "gallery_title_2": "Cenários e figurinos — título da foto",
+    "gallery_url_2": "Cenários e figurinos — link direto da imagem HTTPS",
+    "gallery_title_3": "Dia da apresentação — título da foto",
+    "gallery_url_3": "Dia da apresentação — link direto da imagem HTTPS",
     "credits_cast": "Agradecimentos ao elenco",
     "credits_orientation": "Agradecimentos à orientação",
     "credits_production": "Agradecimentos à produção",
@@ -143,6 +149,14 @@ def create_app():
                 value = request.form.get(key, "").strip()
                 if len(value) > 5000:
                     abort(400)
+                if key.startswith("gallery_url_") and value:
+                    from urllib.parse import urlsplit
+                    try:
+                        parsed = urlsplit(value)
+                        if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+                            abort(400, "O link da imagem precisa começar com https:// e ser público.")
+                    except ValueError:
+                        abort(400, "Link de imagem inválido.")
                 row = Setting.query.filter_by(key=key).first()
                 if row is None:
                     db.session.add(Setting(key=key, value=value))
