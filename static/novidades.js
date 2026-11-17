@@ -131,6 +131,7 @@
       wordSlots.appendChild(span);
     }
     [...wordLetters.children].forEach(b=>{b.disabled=chosen.includes(Number(b.dataset.letterId))});
+    if($("wordNext"))$("wordNext").disabled=true;
     if(chosen.length!==entry.word.length)return;
     if(typed===entry.word){
       if(wordMsg)wordMsg.textContent="🎉 Acertou! Excelente descoberta!";
