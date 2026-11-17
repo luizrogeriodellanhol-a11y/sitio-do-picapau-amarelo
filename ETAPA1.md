@@ -1,26 +1,13 @@
-# Sítio do Picapau Amarelo — Etapa 1
+# Etapa atual — Experiência sem banco de dados
 
-Site da culminância teatral. A página original `index.html` foi preservada.
+O site foi simplificado: **o PostgreSQL, login administrativo e ORM foram retirados da execução** por decisão do projeto. O Web Service Flask apenas entrega a página e os arquivos; o site também pode ser publicado como Static Site.
 
-## Backend
-- `app.py`: Flask, PostgreSQL, login único, CSRF, configurações e registros.
-- `templates/admin.html`: painel de informações do espetáculo.
-- `/admin/login`: login; `/admin`: edição; `/api/site`: dados públicos; `/health`: saúde do serviço.
+- O código da interface está no `index.html` e `static/`.
+- As informações editáveis do espetáculo ficam em `static/conteudo.json`.
+- `/health` retorna o estado do servidor Python.
+- `/admin` e `/admin/login` informam que não existe mais edição por painel.
+- `/api/site` apenas disponibiliza o conteúdo estático por compatibilidade.
+- `DATABASE_URL`, `SECRET_KEY` e `ADMIN_PASSWORD` não são mais utilizados; depois de conferir que este código está publicado, essas variáveis antigas podem ser excluídas do serviço Render.
+- A publicação atual pode ser conferida em `TESTES.md`.
 
-## Configuração no Render
-Criar **Web Service** Python apontando para este repositório (não alterar outro projeto).
-- Build: `pip install -r requirements.txt`
-- Start: `gunicorn app:app`
-- `DATABASE_URL`: URL interna do PostgreSQL existente, se reutilizado (as tabelas do Sítio têm prefixo `sitio_`; confirme que não há conflitos).
-- `SECRET_KEY`: string aleatória de no mínimo 32 caracteres
-- `ADMIN_PASSWORD`: uma senha exclusiva e forte (guarde apenas no painel de variáveis de ambiente do Render; não compartilhe no chat ou GitHub).
-- Alternativa avançada: `ADMIN_PASSWORD_HASH` com hash do Werkzeug tem prioridade se ambas estiverem configuradas.
-- `COOKIE_SECURE=true` no HTTPS do Render.
-
-**Não publique senhas, hashes ou URLs privadas no GitHub.**
-
-## Observações
-- Esta entrega é a **fundação**: o painel salva dados, mas a página pública ainda não consome `/api/site`; integração visual é a próxima tarefa.
-- A galeria persistente, upload, música e animações novas ainda não estão implementados.
-- `db.create_all()` cria as tabelas iniciais; antes de evoluir o esquema, adotar migrações.
-- Para produção pública, adicionar limite de tentativas de login (preferencialmente com armazenamento compartilhado), monitoramento e backup.
+**Importante:** dados armazenados no banco antigo não migram automaticamente para o arquivo JSON. Preencha os textos confirmados em `static/conteudo.json` via GitHub. O progresso dos jogos fica só no navegador de cada visitante.
