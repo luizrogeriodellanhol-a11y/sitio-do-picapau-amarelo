@@ -1,21 +1,28 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Administração — Sítio do Picapau Amarelo</title>
-<style>body{background:#f5e7c8;color:#284c35;font-family:Georgia,serif;margin:0;padding:30px 16px}main{max-width:740px;margin:25px auto;background:#fff9eb;border:2px solid #d5aa53;border-radius:18px;padding:clamp(20px,5vw,40px);box-shadow:0 12px 35px #284c3522}h1{margin-top:0}label{display:block;font-weight:bold;margin:18px 0 7px}input,textarea{width:100%;box-sizing:border-box;border:1px solid #aa976c;border-radius:8px;padding:12px;font:inherit;background:white}textarea{min-height:110px}button{margin-top:20px;padding:12px 22px;background:#284c35;color:white;border:0;border-radius:9px;cursor:pointer;font:inherit}a{color:#284c35}.message{padding:12px;background:#e3efd8;border-radius:8px}.error{background:#f6d8d8}</style></head>
-<body><main><p><a href="/">← Voltar ao Sítio</a></p><h1>{% if login %}Acesso administrativo{% else %}Painel do Sítio{% endif %}</h1>
+<title>Meu Livro Encantado — Administração</title>
+<style>body{background:#f5e7c8;color:#284c35;font-family:Georgia,serif;margin:0;padding:30px 16px}main{max-width:840px;margin:25px auto;background:#fff9eb;border:2px solid #d5aa53;border-radius:18px;padding:clamp(20px,5vw,40px);box-shadow:0 12px 35px #284c3522}h2{margin:28px 0 5px;color:#28563a;border-bottom:2px dashed #ddc99a;padding-bottom:10px}small{display:block;color:#786b55;line-height:1.5;margin:3px 0 14px}.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 14px}.field{min-width:0}.field.wide{grid-column:1/-1}.pill{display:inline-block;background:#e6edd9;color:#315a3c;border-radius:30px;padding:5px 12px;font-size:.75rem;letter-spacing:.04em;font-weight:bold;margin-bottom:9px}h1{margin-top:0}label{display:block;font-weight:bold;margin:18px 0 7px}input,textarea{width:100%;box-sizing:border-box;border:1px solid #aa976c;border-radius:8px;padding:12px;font:inherit;background:white}textarea{min-height:110px}button{margin-top:20px;padding:12px 22px;background:#284c35;color:white;border:0;border-radius:9px;cursor:pointer;font:inherit}a{color:#284c35}.message{padding:12px;background:#e3efd8;border-radius:8px}.error{background:#f6d8d8}</style></head>
+<body><main><p><a href="/">← Voltar ao Sítio</a></p><span class="pill">📖 O LIVRO ENCANTADO</span><h1>{% if login %}Acesso administrativo{% else %}Meu painel mágico{% endif %}</h1>
 {% if error %}<p class="message error" role="alert">{{error}}</p>{% endif %}
 {% if notice %}<p class="message" role="status">{{notice}}</p>{% endif %}
 {% if login %}
 <form method="post"><input type="hidden" name="csrf" value="{{csrf}}"><label for="password">Senha do administrador</label><input id="password" name="password" type="password" required autocomplete="current-password"><button>Entrar</button></form>
 {% else %}
-<p>Atualize as informações da apresentação. Os dados são armazenados no PostgreSQL e disponibilizados em <code>/api/site</code>.</p>
+<p>Escolha o que vai aparecer para os visitantes. As informações salvas no painel atualizam o Sítio sem precisar editar o GitHub.</p><small>Para mostrar nomes e fotografias de estudantes, confirme antes as autorizações necessárias.</small>
 <form method="post"><input type="hidden" name="csrf" value="{{csrf}}">
+<h2>🌻 Boas-vindas e história</h2><p>Os textos principais da aventura aparecem no site.</p>
+<div class="fields">
 {% for key, label in fields.items() %}
+{% if key == "credits_cast" %}</div><h2>✨ Agradecimentos</h2><p>Reconheça as pessoas que ajudaram a dar vida ao Sítio.</p><div class="fields">{% endif %}
+{% if key == "actor_0" %}</div><h2>🎭 Quem interpreta cada personagem?</h2><p>Deixe os nomes em branco enquanto o elenco não estiver confirmado.</p><div class="fields">{% endif %}
+<div class="field {% if key in ['welcome','synopsis'] or key.startswith('credits_') %}wide{% endif %}">
 <label for="{{key}}">{{label}}</label>
-{% if key in ["welcome","synopsis"] %}<textarea id="{{key}}" name="{{key}}" maxlength="5000">{{values.get(key,"")}}</textarea>
+{% if key in ["welcome","synopsis"] or key.startswith('credits_') %}<textarea id="{{key}}" name="{{key}}" maxlength="5000">{{values.get(key,"")}}</textarea>
 {% else %}<input id="{{key}}" name="{{key}}" value="{{values.get(key,"")}}" maxlength="5000">{% endif %}
+</div>
 {% endfor %}
-<button>Salvar informações</button></form>
+</div>
+<button>✨ Salvar alterações</button></form>
 <form method="post" action="/admin/logout"><input type="hidden" name="csrf" value="{{csrf}}"><button type="submit">Sair do painel</button></form>
 {% endif %}
 </main></body></html>
