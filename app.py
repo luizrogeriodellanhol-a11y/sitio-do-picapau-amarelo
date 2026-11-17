@@ -25,9 +25,6 @@ class AuditLog(db.Model):
 
 FIELDS = {
     "play_title": "Título da peça",
-    "school_year": "Turma",
-    "duration": "Duração prevista",
-    "genre": "Gênero da peça",
     "event_date": "Data do espetáculo",
     "event_time": "Horário",
     "event_location": "Local",
@@ -38,9 +35,6 @@ FIELDS = {
 # Valores iniciais do roteiro; configurações já salvas pelo administrador prevalecem.
 DEFAULT_FIELD_VALUES = {
     "play_title": "O Sítio do Picapau Amarelo",
-    "school_year": "6º ano",
-    "duration": "30–40 minutos",
-    "genre": "Comédia · Aventura · Fantasia",
     "synopsis": "Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?",
 }
 
