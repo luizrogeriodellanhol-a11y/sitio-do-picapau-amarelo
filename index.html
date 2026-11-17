@@ -169,9 +169,9 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
   <div class="wrap">
     <div class="section-head"><div><span class="chapter-marker">Capítulo 7</span><div class="kicker">Todo mundo faz parte</div><h2>Créditos e agradecimentos</h2></div><p>Uma apresentação é construída por muitas mãos. Este espaço reconhece quem contribuiu com tempo, criatividade e dedicação.</p></div>
     <div class="credits-grid">
-      <article class="paper-card credit"><div class="icon">🎭</div><h3>Elenco</h3><p>Alunos e alunas que dão vida aos personagens no palco.</p></article>
-      <article class="paper-card credit"><div class="icon">🌱</div><h3>Orientação</h3><p>Professor(a) responsável e equipe pedagógica — nomes a confirmar.</p></article>
-      <article class="paper-card credit"><div class="icon">🧵</div><h3>Produção</h3><p>Cenário, figurino, sonoplastia, organização e apoio — equipe a confirmar.</p></article>
+      <article class="paper-card credit"><div class="icon">🎭</div><h3>Elenco</h3><p id="creditsCast">Pessoas que dão vida aos personagens no palco.</p></article>
+      <article class="paper-card credit"><div class="icon">🌱</div><h3>Orientação</h3><p id="creditsOrientation">Quem ajudou a conduzir essa aventura.</p></article>
+      <article class="paper-card credit"><div class="icon">🧵</div><h3>Produção</h3><p id="creditsProduction">Cenários, figurinos, sons e ideias que construíram essa história.</p></article>
     </div>
   </div>
 </section>
@@ -224,6 +224,13 @@ async function carregarInformacoesDoPainel(){
     update("storySynopsis",data.synopsis);
     update("eventDate",data.event_date);
     update("eventPlace",data.event_location);
+    update("creditsCast",data.credits_cast);
+    update("creditsOrientation",data.credits_orientation);
+    update("creditsProduction",data.credits_production);
+    document.querySelectorAll("#characterGrid .actor strong").forEach((element,i)=>{
+      const actor=data["actor_"+i];
+      if(typeof actor==="string"&&actor.trim())element.textContent=actor.trim();
+    });
     if(typeof data.event_time==="string"&&data.event_time.trim()){
       update("eventTime",data.event_time);
       document.getElementById("eventTimeRow").style.display="flex";
