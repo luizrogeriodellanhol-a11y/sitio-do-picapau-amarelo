@@ -1,37 +1,38 @@
-# Uma Viagem ao Sítio — Culminância Teatral
+# Sítio do Picapau Amarelo — Livro Encantado 🌻
 
-Site responsivo e interativo para a culminância escolar inspirada no universo do Sítio do Picapau Amarelo.
+Site de aventura lúdica para crianças e adolescentes, inspirado na peça escolar **Uma Aventura Mágica**. Sem banco de dados, sem cadastro, sem coleta de nomes ou ranking público.
 
-## Funcionalidades
-- Página inicial temática com navegação adaptada para celular.
-- Cartões de personagens com descrições e intérpretes provisórios.
-- Área de história com texto provisório.
-- Quiz com pontuação e feedback.
-- Segredos clicáveis.
-- Galeria com pré-visualização local de fotos e vídeos.
-- Créditos e agradecimentos.
-- Sem dependências de build: HTML, CSS e JavaScript puros.
+## O que funciona
+- Capa animada de livro com botão para pular e reabrir;
+- Navegação em capítulos, cena ilustrada, mapa com locais para explorar;
+- Personagens com curiosidades, quiz, jogo da memória, selos e passaporte mágico;
+- Caça aos objetos, história com escolhas, palavras embaralhadas, sombras, quebra-cabeça, gerador de histórias;
+- Escolha de um guia, curiosidades dobráveis e álbum de conquistas;
+- Controles de volume, letras maiores, contraste, menos movimento e voltar ao topo;
+- Galeria e créditos com espaços para conteúdo autorizado.
 
-## Publicar pelo GitHub + Render
-1. Crie um repositório novo no GitHub chamado `sitio-encantado`.
-2. Envie `index.html`, `render.yaml` e `README.md` para a raiz do repositório.
-3. No Render, escolha **New + → Static Site** e conecte o repositório.
-4. O Render deve detectar o arquivo `render.yaml`; se pedir configuração manual, use:
-   - Build Command: deixe vazio
-   - Publish Directory: `.`
-5. Publique. Nas configurações do serviço, confira se o repositório e a branch `main` estão conectados para deploy automático a cada commit.
+**As conquistas são salvas apenas no navegador da pessoa, por meio de armazenamento local, sem servidor.** Limpar os dados de navegação apaga esse progresso.
 
-## Editar o conteúdo
-Abra `index.html` e procure por `const siteContent = {` perto do final do arquivo. Ali estão os dados provisórios:
-- `eventDate` e `eventPlace`
-- `characters`
-- `quiz`
-- `secrets`
+## Publicação (dois formatos compatíveis)
+O projeto possui dois serviços Render porque foi criado assim anteriormente:
+1. **Web Service Python existente**: `pip install -r requirements.txt` e `gunicorn app:app`, sem nenhuma variável obrigatória ou banco.
+2. **Static Site**: raiz `.` como diretório de publicação, sem build. O arquivo `render.yaml` descreve essa opção estática.
 
-A estrutura visual está no bloco `<style>` e as seções da página ficam no `<body>`.
+As duas versões usam os mesmos arquivos de interface. Na publicação, use o endereço do serviço que quer compartilhar. Evite confundir com o site antigo.
 
-## Limitação importante da galeria
-O seletor de arquivos cria uma pré-visualização somente no navegador do visitante. Os arquivos não são enviados nem salvos no servidor. Para uma galeria pública persistente, será necessário integrar um serviço de armazenamento e configurar permissões.
+## Como mudar textos e imagens sem banco
+- Abra `static/conteudo.json` no GitHub para editar título, mensagem de boas-vindas, sinopse, data e local, créditos, intérpretes e links de três fotos.
+- Abra `index.html` para mudar a estrutura da página, personagens ou perguntas.
+- Estilos: `static/encantamento.css` e `static/novidades.css`.
+- Interações: `static/encantamento.js`, `static/aventura-extra.js` e `static/novidades.js`.
+- Ilustração original: `static/cenario-encantado.svg`.
 
-## Privacidade
-Antes de publicar fotos, vídeos ou nomes completos de estudantes, confirme a autorização da escola e dos responsáveis. Não coloque senhas, tokens ou dados privados neste repositório.
+O painel administrativo anterior está desativado e mostra um aviso. **Não é possível salvar edições feitas no navegador para todos os visitantes sem uma forma de publicação/autenticação.** As alterações públicas são feitas por commit no GitHub.
+
+## Segurança e cuidado com os estudantes
+- Não adicione senhas, tokens ou informações privadas a arquivos públicos.
+- Só publique nomes e imagens com as autorizações adequadas.
+- A música é opcional, feita por síntese no dispositivo, e começa desligada.
+- As histórias e brincadeiras são independentes do banco de dados.
+
+Veja `TESTES.md` para o roteiro de verificação antes de divulgar.
