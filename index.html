@@ -8,6 +8,7 @@
 <title>Sítio do Picapau Amarelo — Abra o Livro Encantado</title>
 <link rel="stylesheet" href="/static/encantamento.css">
 <script src="/static/encantamento.js" defer></script>
+<script src="/static/aventura-extra.js" defer></script>
 <style>
 :root{--forest:#244b38;--forest2:#35664a;--leaf:#78965c;--gold:#f2c65b;--cream:#fff7e6;--paper:#f8ecd2;--ink:#3d3328;--clay:#b96d4e;--line:#e5d6b8;--shadow:0 18px 50px #1e3b2a18}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}button,input,textarea{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}a{color:inherit}button{cursor:pointer}.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:white;padding:10px;z-index:100}
@@ -35,7 +36,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
     <a class="brand" href="#inicio"><span class="brand-mark">✿</span><span>Uma Viagem ao Sítio</span></a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
     <div class="nav-links" id="navLinks">
-      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#explorar">Mapa mágico</a><a href="#magia">Jogos</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
+      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#explorar">Mapa mágico</a><a href="#magia">Jogos</a><a href="#desafios">Missões</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
     </div>
   </nav>
 </header>
@@ -44,15 +45,12 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
   <button class="collect-stamp" data-stamp="flor" type="button" aria-label="Descobrir selo: Flor da alegria">🌻</button>
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">Entre nessa história ✨</div>
+      <div class="eyebrow">✨ Onde cada página guarda uma surpresa ✨</div>
       <h1><span id="playTitle">O Sítio do Picapau Amarelo</span> <em>Uma aventura mágica.</em></h1>
       <p>Uma casa encantada, um pergaminho misterioso e muitas surpresas. Você está pronto para descobrir os segredos do Sítio?</p>
-      <div class="actions"><a class="btn btn-gold" href="#personagens">✦ Entrar no Sítio</a><a class="btn btn-outline" href="#magia">Descobrir surpresas ↓</a></div>
+      <div class="actions"><a class="btn btn-gold" href="#explorar">🗺️ Começar a aventura</a><a class="btn btn-outline" href="#personagens">✨ Conhecer a turma</a></div>
     </div>
-    <div class="hero-art" aria-label="Ilustração decorativa de uma casa amarela no campo" role="img">
-      <div class="sun"></div><span class="leaf l1">✿</span><span class="leaf l2">✦</span><span class="leaf l3">❧</span>
-      <div class="house"><div class="roof"></div><div class="window left"></div><div class="window right"></div><div class="door"></div><div class="path"></div></div>
-    </div>
+    <div class="hero-art"><img class="hero-scene" src="/static/cenario-encantado.svg" width="1200" height="740" alt="Ilustração da casinha amarela do Sítio cercada por árvores, flores e um caminho encantado"><span class="hero-scene-spark" aria-hidden="true">✦</span><span class="float-star a" aria-hidden="true">✧</span><span class="float-star b" aria-hidden="true">✧</span></div>
   </div>
 </section>
 <section id="boas-vindas">
@@ -71,21 +69,21 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section class="characters" id="personagens">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Toque em cada personagem para descobrir uma curiosidade. Quem será o seu favorito?</p></div>
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 1</span><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Toque em cada personagem para descobrir uma curiosidade. Quem será o seu favorito?</p></div>
     <div class="cards" id="characterGrid"></div>
   </div>
 </section>
 <section id="historia">
   <div class="wrap story-grid">
     <div class="book-illustration" role="img" aria-label="Ilustração decorativa de um livro mágico"><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✿</span><div class="open-book">📖</div></div>
-    <div class="story-copy"><button class="collect-stamp" data-stamp="chave" type="button" aria-label="Descobrir selo: Chave da curiosidade">🗝️</button><div class="kicker">Era uma vez...</div><h2>Uma aventura mágica começa com um mistério.</h2><p id="storySynopsis">Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?</p><p>As melhores histórias começam quando alguém tem coragem de perguntar: “E se...?”</p><div class="paper-card"><strong>Desafio da imaginação ✨</strong><p style="margin:8px 0 0">Você conseguiria encontrar o caminho secreto? Explore o mapa e descubra!</p></div></div>
+    <div class="story-copy"><span class="chapter-marker">Capítulo 2</span><button class="collect-stamp" data-stamp="chave" type="button" aria-label="Descobrir selo: Chave da curiosidade">🗝️</button><div class="kicker">Era uma vez...</div><h2>Uma aventura mágica começa com um mistério.</h2><p id="storySynopsis">Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?</p><p>As melhores histórias começam quando alguém tem coragem de perguntar: “E se...?”</p><div class="paper-card"><strong>Desafio da imaginação ✨</strong><p style="margin:8px 0 0">Você conseguiria encontrar o caminho secreto? Explore o mapa e descubra!</p></div></div>
   </div>
 </section>
 
 <section class="adventure" id="explorar">
   <button class="collect-stamp" data-stamp="estrela" type="button" aria-label="Descobrir selo: Estrela da floresta">⭐</button>
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Capítulo secreto</div><h2>🗺️ Explore o mapa mágico!</h2></div><p>O Sítio está cheio de surpresas! Toque nos lugares do mapa e descubra o que existe em cada cantinho.</p></div>
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 3</span><div class="kicker">Capítulo secreto</div><h2>🗺️ Explore o mapa mágico!</h2></div><p>O Sítio está cheio de surpresas! Toque nos lugares do mapa e descubra o que existe em cada cantinho.</p></div>
     <div class="adventure-layout">
       <div class="adventure-map" aria-label="Mapa interativo do Sítio com quatro locais">
         <button class="map-place" type="button" data-place="house" aria-pressed="true"><span aria-hidden="true">🏡</span>Casa de Dona Benta</button>
@@ -105,7 +103,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section class="game-section" id="magia">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker" style="color:var(--gold)">Venha brincar!</div><h2>O Cantinho da Magia</h2></div><p>Resolva desafios, descubra surpresas e mostre o quanto você conhece o Sítio!</p></div>
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 4</span><div class="kicker" style="color:var(--gold)">Venha brincar!</div><h2>O Cantinho da Magia</h2></div><p>Resolva desafios, descubra surpresas e mostre o quanto você conhece o Sítio!</p></div>
     <div class="game-grid">
       <article class="game-card">
         <div class="kicker">Desafio do Visconde</div><h3>Quiz do Sítio</h3><p>Responda às perguntas e veja quantos pontos consegue fazer.</p>
@@ -123,9 +121,42 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
     </div>
   </div>
 </section>
+
+<section class="new-challenge" id="desafios">
+  <div class="wrap">
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 5</span><div class="kicker">Uma missão para você</div><h2>🌟 A aventura continua!</h2></div><p>Você consegue descobrir os objetos escondidos e ajudar os moradores do Sítio a encontrar novas pistas?</p></div>
+    <div class="quest-grid">
+      <div class="quest-game">
+        <h3>🔎 Caça aos objetos encantados</h3>
+        <p>Encontre os cinco objetos espalhados pela paisagem. Toque em cada um!</p>
+        <div class="quest-scene" aria-label="Cena do Sítio com cinco objetos escondidos">
+          <button class="object-target" data-object="scroll" type="button" aria-label="Encontrar pergaminho">📜</button>
+          <button class="object-target" data-object="key" type="button" aria-label="Encontrar chave">🗝️</button>
+          <button class="object-target" data-object="star" type="button" aria-label="Encontrar estrela">⭐</button>
+          <button class="object-target" data-object="leaf" type="button" aria-label="Encontrar folha">🍃</button>
+          <button class="object-target" data-object="book" type="button" aria-label="Encontrar livro">📖</button>
+        </div>
+        <p class="quest-progress" id="objectProgress" role="status" aria-live="polite">0 de 5 objetos encontrados</p>
+        <div class="discovery-note" id="objectReward" hidden>🌟 Você encontrou tudo! O verdadeiro tesouro é a curiosidade de explorar.</div>
+        <button class="memory-restart" id="objectRestart" type="button">🔄 Procurar de novo</button>
+      </div>
+      <div class="dialogue-card">
+        <div class="kicker">Converse com os moradores</div>
+        <h3>💬 História com escolhas</h3>
+        <div class="dialogue-avatar" id="dialogueAvatar" aria-hidden="true">🪆</div>
+        <div class="dialogue-speaker" id="dialogueSpeaker">Emília</div>
+        <p class="dialogue-line" id="dialogueLine" aria-live="polite">Pssiu! Temos um mistério para resolver. Você me ajuda?</p>
+        <div class="dialogue-options" id="dialogueOptions"></div>
+        <div class="discovery-note" id="dialogueResult" hidden></div>
+        <button type="button" id="dialogueRestart" class="dialogue-restart" hidden>↻ Começar outra aventura</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="gallery" id="memorias">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. As lembranças da apresentação vão fazer parte deste livro encantado.</p></div>
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 6</span><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. As lembranças da apresentação vão fazer parte deste livro encantado.</p></div>
     <div class="gallery-grid">
       <article class="paper-card gallery-tile"><span class="big-emoji">🎬</span><h3>Bastidores</h3><p>Os preparativos e os ensaios da turma.</p></article>
       <article class="paper-card gallery-tile"><span class="big-emoji">🎨</span><h3>Cenários e figurinos</h3><p>As ideias que deram vida ao palco.</p></article>
@@ -136,7 +167,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section id="creditos">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Todo mundo faz parte</div><h2>Créditos e agradecimentos</h2></div><p>Uma apresentação é construída por muitas mãos. Este espaço reconhece quem contribuiu com tempo, criatividade e dedicação.</p></div>
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 7</span><div class="kicker">Todo mundo faz parte</div><h2>Créditos e agradecimentos</h2></div><p>Uma apresentação é construída por muitas mãos. Este espaço reconhece quem contribuiu com tempo, criatividade e dedicação.</p></div>
     <div class="credits-grid">
       <article class="paper-card credit"><div class="icon">🎭</div><h3>Elenco</h3><p>Alunos e alunas que dão vida aos personagens no palco.</p></article>
       <article class="paper-card credit"><div class="icon">🌱</div><h3>Orientação</h3><p>Professor(a) responsável e equipe pedagógica — nomes a confirmar.</p></article>
@@ -144,7 +175,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
     </div>
   </div>
 </section>
-<section class="closing"><div class="wrap"><div class="kicker">Até a próxima aventura</div><h2>Obrigado por visitar nosso Sítio!</h2><p>Que a magia das histórias continue muito depois que as cortinas se fecharem. Esta página é uma lembrança coletiva do nosso trabalho e da nossa imaginação.</p><a class="btn btn-dark" href="#inicio">Voltar ao começo ↑</a></div></section>
+<section class="closing"><div class="wrap"><div class="kicker">Até a próxima aventura</div><h2>Obrigado por visitar nosso Sítio!</h2><p>Que a magia das histórias continue muito depois que as cortinas se fecharem. Esta página é uma lembrança coletiva do nosso trabalho e da nossa imaginação.</p><a class="btn btn-dark" href="#inicio">Voltar ao começo ↑</a><a class="cta-play" href="#desafios">⭐ Quero jogar novamente</a></div></section>
 </main>
 <footer><div class="footer-inner"><p>✿ <strong>Uma Viagem ao Sítio</strong> · Onde a imaginação ganha vida</p><p>Projeto escolar inspirado no universo do <em>Sítio do Picapau Amarelo</em>. <span id="year"></span></p></div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
