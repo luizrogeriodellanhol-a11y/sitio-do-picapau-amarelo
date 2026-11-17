@@ -78,3 +78,90 @@ body.gate-open{overflow:hidden}
 @media(max-width:850px){.adventure-layout{grid-template-columns:1fr}.adventure-map{min-height:370px}.map-info{min-height:210px}}
 @media(max-width:620px){.book-cover{min-height:340px}.book-cover h2{font-size:2rem}.book-gate-intro{font-size:.95rem}.magic-tools{right:8px;left:8px;bottom:8px;justify-content:center;border-radius:18px}.magic-tools label{display:none}.quest-popover{right:8px;bottom:84px}.map-place{width:94px;min-height:84px;font-size:.7rem}.map-place span{font-size:2rem}.adventure-map{min-height:350px}.memory-board{gap:7px}.magic-memory{padding:20px}}
 @media(prefers-reduced-motion:reduce){.book-cover,.book-gate,.collect-stamp,.map-place,.memory-card{animation:none!important;transition:none!important}}
+
+
+/* Edição 2: paisagem original, livro vivo e desafios de exploração */
+:root{--book-ink:#244632;--book-gold:#e0b867;--book-paper:#fff7df}
+body{background:#f8f0d9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M12 13l2 2M46 42l2 2' stroke='%23d8c99b' stroke-width='1' opacity='.35'/%3E%3C/svg%3E")}
+.nav{max-width:1210px}
+header{box-shadow:0 5px 22px #16382713}
+.nav-links a{padding:9px 6px;border-radius:9px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a:focus-visible{background:#dfedda;text-decoration:none}
+.hero{background:radial-gradient(circle at 78% 12%,#729373,transparent 38%),linear-gradient(125deg,#143a2a,#305d3f 60%,#5a7950);min-height:650px}
+.hero:before{pointer-events:none}
+.hero-inner{grid-template-columns:1fr 1.02fr;gap:28px;max-width:1220px}
+.hero-art{min-height:475px;isolation:isolate;display:flex;align-items:center;justify-content:center}
+.hero-scene{width:100%;height:auto;max-height:455px;object-fit:cover;aspect-ratio:1.42;border:9px solid #e0b967;outline:4px solid #f7e9c280;border-radius:46% 46% 18px 18px/26% 26% 18px 18px;box-shadow:0 26px 60px #08251881,0 0 0 17px #d9b4741f;filter:saturate(1.16)}
+.hero-scene-spark{position:absolute;right:3%;top:0;font-size:2.4rem;filter:drop-shadow(0 2px 8px #f8cc76);animation:float 4s ease-in-out infinite}
+.hero .house,.hero .sun{display:none}
+.hero h1{font-size:clamp(2.6rem,5.3vw,5.05rem);text-shadow:0 3px 7px #102d2015}
+.hero p{font-size:clamp(1.05rem,1.5vw,1.24rem)}
+.hero .btn-gold{box-shadow:0 5px 0 #ab7c38}
+.hero .btn-gold:hover{box-shadow:0 3px 0 #ab7c38}
+.book-gate{background:radial-gradient(ellipse at center,#486d4e 0%,#173b2c 75%,#09251e)}
+.book-gate-inner{max-width:780px}
+.book-cover{min-height:430px;transform-style:preserve-3d;backface-visibility:hidden;box-shadow:inset 18px 0 25px #092a2233,13px 14px 0 #d1c096,22px 24px 34px #071f17b0}
+.book-cover:after{content:"✦ ❧ ✦";font-size:1.45rem;letter-spacing:12px}
+.book-cover h2{font-size:clamp(2.15rem,5vw,3rem)}
+.book-gate.is-opening .book-cover{transform:perspective(850px) rotateY(-90deg) rotateZ(-2deg) scale(.94);transform-origin:left center}
+.chapter-marker{display:inline-flex;align-items:center;gap:8px;font:bold .76rem Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#997039;background:#fff5d4;padding:8px 12px;border:1px solid #e2cb94;border-radius:99px;margin-bottom:15px}
+.chapter-marker:before{content:"✦";color:#be8735}
+.paper-card,.game-card{transition:transform .2s,box-shadow .2s}
+.character{position:relative;min-height:335px;background:linear-gradient(145deg,#fffdf2,#f6eacb);border:2px solid #e1cca2;box-shadow:0 9px 18px #2e53331a}
+.character:hover{transform:translateY(-7px);box-shadow:0 20px 30px #2e53332e}
+.character .portrait{height:155px;border:3px solid #e5c47d;outline:1px solid #a48b63;background:radial-gradient(circle at 53% 42%,#ffe3a7 0%,#b5cda4 65%,#7ca38b 100%);font-size:4rem}
+.character .portrait:before{content:"✦";position:absolute;left:9px;top:7px;font-size:1.6rem;color:#fff5c1}
+.character:nth-child(3n+2) .portrait{background:radial-gradient(circle,#fbe4bd,#d8c1b8 70%,#ae928d)}
+.character:nth-child(3n+3) .portrait{background:radial-gradient(circle,#fff0b2,#b9cba1 65%,#6b9c77)}
+.character .role{color:#946632;letter-spacing:.07em}
+.character .funfact-btn{margin-top:auto}
+.story-grid .book-illustration{background:linear-gradient(120deg,#e9e1b7aa,#a3c19daa),url('/static/cenario-encantado.svg') center/cover;border:7px solid #e7cf99;box-shadow:0 14px 42px #24463227}
+.book-illustration .open-book{font-size:clamp(6rem,12vw,10rem);text-shadow:0 8px 10px #254b3c80}
+.adventure-map{background:url('/static/cenario-encantado.svg') center 48%/cover;border:9px double #e4b668;box-shadow:inset 0 0 0 5px #f6edd1,0 24px 40px #173c2a26}
+.adventure-map:before{display:none}
+.adventure-map:after{content:"✦  Escolha um lugar mágico  ✦";font:bold .84rem Georgia,serif;color:#1d4935;background:#fff2d2e8;border-radius:99px;letter-spacing:1px;padding:10px 15px;bottom:14px;left:50%;right:auto;width:max-content;max-width:90%;transform:translateX(-50%)}
+.map-place{width:128px;min-height:91px;background:#fff5dcf0;border:3px solid #bd9b59;box-shadow:0 7px 0 #76582a99,0 13px 20px #17382155}
+.map-place span{filter:drop-shadow(0 3px 2px #76582a36)}
+.map-place[data-place=house]{left:37%;top:27%}
+.map-place[data-place=kitchen]{right:4%;top:11%}
+.map-place[data-place=forest]{left:3%;bottom:20%}
+.map-place[data-place=path]{right:7%;bottom:18%}
+.map-place:hover,.map-place[aria-pressed=true]{background:#fff1b5;border-color:#82602d}
+.map-info{box-shadow:0 15px 30px #183c2a13}
+.game-card{border:3px solid #e4bd74;box-shadow:0 12px 20px #0d251a3c}
+.answer{border-width:2px;min-height:48px;font-weight:600}
+.game-section{background:radial-gradient(circle at 10% 20%,#42674a,#173e2e 60%)}
+.magic-memory{border:3px double #d2a75f}
+.memory-card{min-height:65px}
+.new-challenge{background:#e9f0d4;position:relative}
+.new-challenge .wrap{max-width:1120px}
+.quest-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:22px;align-items:stretch}
+.quest-game{background:#fffae9;border:3px solid #ddb56f;border-radius:24px;padding:26px;box-shadow:0 12px 35px #315d4025}
+.quest-game h3{color:#214c37;font-size:clamp(1.5rem,3vw,2rem)}
+.quest-game p{color:#685b46}
+.quest-scene{position:relative;background:url('/static/cenario-encantado.svg') center/cover;aspect-ratio:1.5;border:8px solid #c7a56d;border-radius:24px;min-height:285px;overflow:hidden}
+.object-target{position:absolute;z-index:2;min-width:48px;min-height:48px;border:2px dashed #e4c76e;border-radius:50%;font-size:1.7rem;background:#fffbdfed;box-shadow:0 4px 16px #153c2999;transition:transform .2s,background .2s}
+.object-target:hover{transform:scale(1.18)}
+.object-target.is-found{background:#c9e8b6;border-color:#497d4c}
+.object-target[data-object=scroll]{left:43%;top:64%}
+.object-target[data-object=key]{right:22%;top:35%}
+.object-target[data-object=star]{left:20%;top:23%}
+.object-target[data-object=leaf]{left:8%;bottom:18%}
+.object-target[data-object=book]{right:12%;bottom:13%}
+.quest-progress{font-weight:bold;color:#29543a;margin-top:16px}
+.dialogue-card{background:#fff9e7;border:3px solid #d6ad6b;border-radius:24px;padding:26px;box-shadow:0 12px 35px #315d4025;position:relative}
+.dialogue-avatar{font-size:3.9rem;float:left;margin:0 18px 8px 0}
+.dialogue-speaker{font-weight:900;color:#2c6241;text-transform:uppercase;font-size:.82rem;letter-spacing:.08em}
+.dialogue-line{font-size:1.18rem;min-height:75px;color:#463923;line-height:1.5}
+.dialogue-options{display:grid;gap:10px;clear:both}
+.dialogue-option{width:100%;text-align:left;padding:14px 16px;background:#f5e6c0;border:2px solid #caaa68;border-radius:14px;color:#294d36;font-weight:bold;min-height:50px}
+.dialogue-option:hover{background:#e2eecb;border-color:#538c5d}
+.dialogue-restart{padding:11px 15px;border:0;border-radius:12px;background:#24513b;color:white;font-weight:bold}
+.discovery-note{background:#e1edd7;color:#27543e;padding:14px;border-radius:13px;font-weight:bold;margin-top:14px}
+.credit,.gallery-tile{border:2px solid #e2cca1}
+.cta-play{display:inline-flex;gap:9px;align-items:center;text-decoration:none;background:#f0c86a;color:#224b36;padding:12px 22px;border-radius:100px;font-weight:900;box-shadow:0 5px 0 #b18d48;margin-top:10px}
+.float-star{position:absolute;color:#ffdf80;font-size:1.9rem;pointer-events:none;animation:float 5s ease-in-out infinite}
+.float-star.a{top:11%;left:10%;animation-delay:1s}.float-star.b{right:8%;bottom:11%;animation-delay:2.2s}
+@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.hero-art{min-height:325px}.hero-scene{max-height:385px}.quest-grid{grid-template-columns:1fr}.hero h1{max-width:850px}}
+@media(max-width:620px){.hero-art{min-height:245px}.hero-scene{max-height:255px;border-width:5px;outline-width:2px}.hero{min-height:auto}.book-cover{min-height:350px}.quest-game,.dialogue-card{padding:18px}.quest-scene{min-height:240px}.map-place{width:102px;min-height:83px}.map-place[data-place=house]{left:33%;top:30%}.map-place[data-place=kitchen]{right:2%;top:8%}.map-place[data-place=forest]{left:2%;bottom:26%}.map-place[data-place=path]{right:3%;bottom:21%}.map-place span{font-size:1.9rem}.adventure-map{min-height:400px}.adventure-map:after{font-size:.7rem}.dialogue-line{font-size:1.04rem}}
+@media(prefers-reduced-motion:reduce){.hero-scene,.float-star,.hero-scene-spark{animation:none!important}.book-gate.is-opening{animation:none!important}}
