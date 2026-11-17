@@ -65,12 +65,12 @@ def create_app():
         raise RuntimeError("Configure SECRET_KEY com pelo menos 32 caracteres.")
     app.secret_key = secret
     url = os.environ.get("DATABASE_URL")
-    if not url:
-        raise RuntimeError("Configure DATABASE_URL do PostgreSQL.")
-    if url.startswith("postgres://"):
+    if url and url.startswith("postgres://"):
         url = "postgresql://" + url[len("postgres://"):]
+    # O site público continua funcionando mesmo quando o banco expira ou é removido.
+    # Não usamos armazenamento temporário para fingir que informações foram salvas.
     app.config.update(
-        SQLALCHEMY_DATABASE_URI=url,
+        SQLALCHEMY_DATABASE_URI=url or "sqlite:///:memory:",
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
@@ -78,8 +78,16 @@ def create_app():
         MAX_CONTENT_LENGTH=1024 * 1024,
     )
     db.init_app(app)
-    with app.app_context():
-        db.create_all()
+    database_ready = False
+    if url:
+        try:
+            with app.app_context():
+                db.create_all()
+            database_ready = True
+        except Exception:
+            app.logger.warning("Banco de dados indisponível. A página pública continuará ativa.")
+    else:
+        app.logger.warning("DATABASE_URL não configurado. Painel de edição temporariamente desativado.")
 
     def authenticated(fn):
         @wraps(fn)
@@ -110,10 +118,18 @@ def create_app():
 
     @app.get("/api/site")
     def public_site():
-        return jsonify({s.key: s.value for s in Setting.query.all() if s.key in FIELDS})
+        if not database_ready:
+            return jsonify({})
+        try:
+            return jsonify({s.key: s.value for s in Setting.query.all() if s.key in FIELDS})
+        except Exception:
+            app.logger.warning("Banco temporariamente indisponível durante leitura pública.")
+            return jsonify({})
 
     @app.route("/admin/login", methods=["GET", "POST"])
     def login():
+        if not database_ready:
+            return render_template("admin.html", login=True, csrf="", error="O banco de dados não está conectado. O Sítio continua funcionando, mas a edição está pausada até configurar um novo banco."), 503
         if "csrf" not in session:
             session["csrf"] = secrets.token_urlsafe(32)
         error = None
@@ -139,6 +155,8 @@ def create_app():
     @app.route("/admin", methods=["GET", "POST"])
     @authenticated
     def admin():
+        if not database_ready:
+            return render_template("admin.html", login=True, csrf="", error="O banco de dados não está conectado. As alterações não podem ser salvas agora."), 503
         if "csrf" not in session:
             session["csrf"] = secrets.token_urlsafe(32)
         notice = None
