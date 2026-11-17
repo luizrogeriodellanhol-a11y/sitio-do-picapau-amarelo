@@ -165,3 +165,11 @@ header{box-shadow:0 5px 22px #16382713}
 @media(max-width:850px){.hero-inner{grid-template-columns:1fr}.hero-art{min-height:325px}.hero-scene{max-height:385px}.quest-grid{grid-template-columns:1fr}.hero h1{max-width:850px}}
 @media(max-width:620px){.hero-art{min-height:245px}.hero-scene{max-height:255px;border-width:5px;outline-width:2px}.hero{min-height:auto}.book-cover{min-height:350px}.quest-game,.dialogue-card{padding:18px}.quest-scene{min-height:240px}.map-place{width:102px;min-height:83px}.map-place[data-place=house]{left:33%;top:30%}.map-place[data-place=kitchen]{right:2%;top:8%}.map-place[data-place=forest]{left:2%;bottom:26%}.map-place[data-place=path]{right:3%;bottom:21%}.map-place span{font-size:1.9rem}.adventure-map{min-height:400px}.adventure-map:after{font-size:.7rem}.dialogue-line{font-size:1.04rem}}
 @media(prefers-reduced-motion:reduce){.hero-scene,.float-star,.hero-scene-spark{animation:none!important}.book-gate.is-opening{animation:none!important}}
+
+/* Fotos autorizadas da galeria: aparecem apenas após carregamento válido. */
+.gallery-tile{min-height:255px}
+.gallery-tile>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.gallery-tile.has-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#13342705 18%,#15382ae5 100%);z-index:1;pointer-events:none}
+.gallery-tile.has-photo h3,.gallery-tile.has-photo p{color:#fffaf0;position:relative;z-index:2}
+.gallery-tile.has-photo .big-emoji{display:none}
+@media(max-width:620px){.gallery-tile{min-height:205px}}
