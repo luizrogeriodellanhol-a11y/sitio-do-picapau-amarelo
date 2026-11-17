@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/static/encantamento.css">
 <script src="/static/encantamento.js" defer></script>
 <script src="/static/aventura-extra.js" defer></script>
+<link rel="stylesheet" href="/static/novidades.css">
+<script src="/static/novidades.js" defer></script>
 <style>
 :root{--forest:#244b38;--forest2:#35664a;--leaf:#78965c;--gold:#f2c65b;--cream:#fff7e6;--paper:#f8ecd2;--ink:#3d3328;--clay:#b96d4e;--line:#e5d6b8;--shadow:0 18px 50px #1e3b2a18}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}button,input,textarea{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}a{color:inherit}button{cursor:pointer}.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:white;padding:10px;z-index:100}
@@ -21,6 +23,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <div class="book-gate" id="bookGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
   <div class="book-gate-inner">
     <div class="book-cover"><span class="cover-badge" aria-hidden="true">📖</span><h2 id="gateTitle">Sítio do Picapau Amarelo</h2><p>Uma Aventura Mágica</p></div>
@@ -36,10 +39,17 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
     <a class="brand" href="#inicio"><span class="brand-mark">✿</span><span>Uma Viagem ao Sítio</span></a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
     <div class="nav-links" id="navLinks">
-      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#explorar">Mapa mágico</a><a href="#magia">Jogos</a><a href="#desafios">Missões</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
+      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#explorar">Mapa mágico</a><a href="#magia">Jogos</a><a href="#desafios">Missões</a><a href="#oficina">Oficina</a><a href="#conquistas">Conquistas</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
     </div>
   </nav>
 </header>
+<div class="reading-tools" role="group" aria-label="Personalizar a leitura">
+  <span class="reading-hint">✨ Deixe sua aventura do seu jeito</span>
+  <button id="bigText" type="button" aria-pressed="false">A+ Letras maiores</button>
+  <button id="contrastToggle" type="button" aria-pressed="false">◐ Contraste</button>
+  <button id="motionToggle" type="button" aria-pressed="false">✧ Menos movimento</button>
+  <button id="reopenBook" type="button">📖 Ver a capa</button>
+</div>
 <main id="conteudo">
 <section class="hero" id="inicio">
   <button class="collect-stamp" data-stamp="flor" type="button" aria-label="Descobrir selo: Flor da alegria">🌻</button>
@@ -64,6 +74,24 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
         <div class="notice-row"><div class="notice-icon">🎭</div><div><strong>Elenco e equipe</strong><small>Conheça as pessoas por trás da magia.</small></div></div>
         <div class="notice-row"><div class="notice-icon">📍</div><div><strong>Local do evento</strong><small id="eventPlace">A confirmar pela escola</small></div></div>
       </div></article>
+    </div>
+  </div>
+</section>
+
+<section id="guias" class="discovery-zone">
+  <div class="wrap">
+    <div class="chapter-panel">
+      <span class="chapter-marker">Sua aventura começa aqui</span>
+      <h2 class="chapter-strong">🧭 Escolha um companheiro para explorar o Sítio!</h2>
+      <p>Quem vai acompanhar você? Pode mudar de ideia quando quiser.</p>
+      <div class="magic-compass" role="group" aria-label="Escolha seu companheiro de aventura">
+        <button class="guide-choice" data-guide="emilia" aria-pressed="false"><span class="guide-face" aria-hidden="true">🪆</span>Emília</button>
+        <button class="guide-choice" data-guide="visconde" aria-pressed="false"><span class="guide-face" aria-hidden="true">🌽</span>Visconde</button>
+        <button class="guide-choice" data-guide="saci" aria-pressed="false"><span class="guide-face" aria-hidden="true">🍃</span>Saci</button>
+        <button class="guide-choice" data-guide="narizinho" aria-pressed="false"><span class="guide-face" aria-hidden="true">🌷</span>Narizinho</button>
+      </div>
+      <p class="guide-message" id="guideMessage" aria-live="polite">Escolha um personagem para ouvir o convite dele!</p>
+      <p class="magic-prompt">🌟 Sua escolha pode desbloquear uma conquista no final do livro.</p>
     </div>
   </div>
 </section>
@@ -154,6 +182,70 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
   </div>
 </section>
 
+
+<section class="gaming-zone" id="oficina">
+  <div class="wrap">
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 6</span><div class="kicker">Mãos à imaginação</div><h2>🎲 A oficina de aventuras</h2></div><p>Mais quatro desafios diferentes! Experimente à vontade, sem cadastro e sem pressa.</p></div>
+    <div class="gaming-grid">
+      <article class="minigame">
+        <span class="game-counter" id="wordNumber">Palavra 1 de 5</span>
+        <h3>📜 Palavra secreta</h3>
+        <p>Coloque as letras na ordem certa para revelar palavras mágicas!</p>
+        <p class="magic-prompt" id="wordClue">Uma pista aparece aqui.</p>
+        <div class="word-slots" id="wordSlots" aria-label="Letras escolhidas"></div>
+        <div class="word-letters" id="wordLetters" aria-label="Letras disponíveis"></div>
+        <div class="game-toolbar">
+          <button type="button" class="game-action secondary" id="wordUndo">↩ Voltar uma letra</button>
+          <button type="button" class="game-action secondary" id="wordReset">⟳ Misturar</button>
+          <button type="button" class="game-action" id="wordNext" disabled>Próxima palavra →</button>
+        </div>
+        <p class="game-msg" id="wordMessage" role="status" aria-live="polite"></p>
+      </article>
+      <article class="minigame">
+        <span class="game-counter" id="shadowCounter">Rodada 1 de 5</span>
+        <h3>🌙 Quem está na sombra?</h3>
+        <p>Olhe bem a silhueta e tente descobrir qual personagem apareceu!</p>
+        <div class="shadow-figure" id="shadowFigure" aria-label="Silhueta misteriosa"><span id="shadowIcon" aria-hidden="true">🪆</span></div>
+        <div class="shadow-choices" id="shadowChoices"></div>
+        <div class="game-toolbar">
+          <button class="game-action" id="shadowNext" type="button" hidden>Próxima sombra →</button>
+          <button class="game-action secondary" id="shadowRestart" type="button">⟳ Recomeçar</button>
+        </div>
+        <p class="game-msg" id="shadowMessage" role="status" aria-live="polite">Qual será o personagem?</p>
+      </article>
+      <article class="minigame">
+        <span class="game-counter" id="puzzleCounter">Trocas: 0</span>
+        <h3>🏡 Construa o Sítio</h3>
+        <p>Troque duas peças por vez até remontar a paisagem encantada.</p>
+        <div class="puzzle-tiles" id="puzzleBoard" aria-label="Quebra-cabeça de nove peças"></div>
+        <img id="puzzlePreview" src="/static/cenario-encantado.svg" alt="Imagem completa da casinha amarela para ajudar no quebra-cabeça" loading="lazy" style="max-width:100%;border-radius:12px;margin:12px auto" hidden>
+        <div class="game-toolbar">
+          <button class="game-action secondary" id="puzzlePeek" type="button" aria-pressed="false">👁️ Ver a imagem</button>
+          <button class="game-action secondary" id="puzzleRestart" type="button">🔄 Misturar peças</button>
+        </div>
+        <p class="game-msg" id="puzzleMessage" role="status" aria-live="polite">Toque em duas peças para trocar.</p>
+      </article>
+      <article class="minigame">
+        <span class="game-counter">Laboratório da imaginação</span>
+        <h3>🪄 Invente uma história</h3>
+        <p>Escolha um personagem, um lugar e um objeto. O livro vai inventar uma aventura diferente!</p>
+        <div class="story-choices">
+          <label for="storyWho">Quem participa?
+            <select id="storyWho"><option value="emilia">🪆 Emília</option><option value="saci">🍃 Saci</option><option value="visconde">🌽 Visconde</option><option value="rabico">🐷 Rabicó</option></select>
+          </label>
+          <label for="storyWhere">Onde acontece?
+            <select id="storyWhere"><option value="casa">🏡 Casa amarela</option><option value="floresta">🌳 Floresta</option><option value="cozinha">🥧 Cozinha</option><option value="jardim">🌻 Jardim</option></select>
+          </label>
+          <label for="storyWhat">O que encontraram?
+            <select id="storyWhat"><option value="pergaminho">📜 Pergaminho</option><option value="chave">🗝️ Chave dourada</option><option value="livro">📖 Livro encantado</option><option value="flor">🌸 Flor mágica</option></select>
+          </label>
+        </div>
+        <div class="game-toolbar"><button type="button" class="game-action" id="createStory">✨ Criar minha aventura!</button></div>
+        <div class="story-output" id="storyOutput" aria-live="polite" hidden></div>
+      </article>
+    </div>
+  </div>
+</section>
 <section class="gallery" id="memorias">
   <div class="wrap">
     <div class="section-head"><div><span class="chapter-marker">Capítulo 6</span><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. As lembranças da apresentação vão fazer parte deste livro encantado.</p></div>
@@ -163,6 +255,40 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
       <article class="paper-card gallery-tile" data-gallery-slot="3"><span class="big-emoji">🌟</span><h3>Dia da apresentação</h3><p>Os registros da nossa culminância.</p></article>
     </div>
     <div class="paper-card gallery-note">🌟 Novas lembranças mágicas chegarão aqui. Continue explorando os capítulos e descobrindo segredos!</div>
+  </div>
+</section>
+
+<section id="curiosidades" class="discovery-zone">
+  <div class="wrap">
+    <div class="section-head"><div><span class="chapter-marker">Capítulo 7</span><div class="kicker">Pequenos mistérios</div><h2>🔎 Páginas de descobertas</h2></div><p>Abra as páginas para encontrar curiosidades da aventura. Quantas você vai descobrir?</p></div>
+    <div class="discovery-grid">
+      <div class="chapter-panel">
+        <details class="discovery-item" id="curio1"><summary>🪆 O que faz a Emília tão especial?</summary><p>Ela é uma boneca cheia de opinião, curiosidade e imaginação. Na nossa aventura, não perde a chance de investigar!</p></details>
+        <details class="discovery-item" id="curio2"><summary>🌽 O Visconde sabe de tudo?</summary><p>Ele adora estudar e pesquisar. E sabe que conversar com os amigos também ajuda a descobrir coisas novas.</p></details>
+        <details class="discovery-item" id="curio3"><summary>🐷 O que deixa Rabicó animado?</summary><p>Um lanche gostoso! Rabicó consegue transformar qualquer conversa numa discussão sobre comida.</p></details>
+        <details class="discovery-item" id="curio4"><summary>🍃 Onde o Saci gosta de brincar?</summary><p>Na floresta, onde conhece atalhos, histórias e grandes surpresas. Mas cuidado: ele adora brincar com os visitantes!</p></details>
+      </div>
+      <div class="chapter-panel">
+        <details class="discovery-item" id="curio5"><summary>📜 Para que serve o pergaminho?</summary><p>É uma pista misteriosa que faz a turma iniciar uma investigação. O segredo completo fica para a apresentação!</p></details>
+        <details class="discovery-item" id="curio6"><summary>📖 Por que ler abre caminhos?</summary><p>Uma história pode nos apresentar mundos, ideias e personagens que jamais conheceríamos de outro jeito.</p></details>
+        <details class="discovery-item" id="curio7"><summary>🤝 Qual é a força da amizade?</summary><p>Compartilhar ideias, ouvir uns aos outros e trabalhar em equipe torna qualquer desafio mais interessante.</p></details>
+        <details class="discovery-item" id="curio8"><summary>✨ Existe magia de verdade no Sítio?</summary><p>A imaginação pode transformar uma casa, uma floresta e até um livro numa aventura inesquecível.</p></details>
+      </div>
+    </div>
+    <p class="game-msg" id="factsCounter" role="status" aria-live="polite">0 de 8 descobertas abertas</p>
+  </div>
+</section>
+<section class="badge-zone" id="conquistas">
+  <div class="wrap">
+    <div class="section-head"><div><span class="chapter-marker">Seu passaporte</span><div class="kicker" style="color:#f0cb78">Uma aventura só sua</div><h2>🏅 Álbum de conquistas</h2></div><p>Brinque, explore e desbloqueie medalhas pelo Sítio! Não precisa fazer tudo de uma vez.</p></div>
+    <div class="badge-summary"><strong id="badgeCounter">0 de 11 conquistas</strong><progress id="badgeProgress" max="11" value="0" aria-label="Conquistas desbloqueadas"></progress><span>✨ Seu progresso fica guardado somente neste navegador.</span></div>
+    <div class="badge-grid" id="achievementGrid"></div>
+    <p class="discovery-note" id="badgeCelebration" hidden>🌟 UAU! Você completou todas as conquistas. A imaginação está cheia de possibilidades!</p>
+    <div class="badge-actions">
+      <button id="printBadges" type="button">🖨️ Imprimir minhas conquistas</button>
+      <button id="resetBadges" type="button">↻ Recomeçar aventura</button>
+    </div>
+    <p class="badge-clarify">Não existe conta, ranking público nem coleta de nomes. As conquistas são apenas uma brincadeira neste aparelho.</p>
   </div>
 </section>
 <section id="creditos">
@@ -178,6 +304,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 <section class="closing"><div class="wrap"><div class="kicker">Até a próxima aventura</div><h2>Obrigado por visitar nosso Sítio!</h2><p>Que a magia das histórias continue muito depois que as cortinas se fecharem. Esta página é uma lembrança coletiva do nosso trabalho e da nossa imaginação.</p><a class="btn btn-dark" href="#inicio">Voltar ao começo ↑</a><a class="cta-play" href="#desafios">⭐ Quero jogar novamente</a></div></section>
 </main>
 <footer><div class="footer-inner"><p>✿ <strong>Uma Viagem ao Sítio</strong> · Onde a imaginação ganha vida</p><p>Projeto escolar inspirado no universo do <em>Sítio do Picapau Amarelo</em>. <span id="year"></span></p></div></footer>
+<button type="button" id="backTop" class="back-top" aria-label="Voltar ao início" hidden>↑ Início</button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 /* CONTEÚDO EDITÁVEL: atualize nomes, descrições, intérpretes, data e local neste bloco. */
@@ -212,10 +339,10 @@ const siteContent = {
 };
 document.getElementById("eventDate").textContent=siteContent.eventDate;
 document.getElementById("eventPlace").textContent=siteContent.eventPlace;
-/* Carrega informações públicas do painel, sem expor dados administrativos. */
+/* Carrega conteúdo público de um arquivo do GitHub, sem banco de dados. */
 async function carregarInformacoesDoPainel(){
   try {
-    const response=await fetch("/api/site",{headers:{"Accept":"application/json"},cache:"no-store"});
+    const response=await fetch("/static/conteudo.json",{headers:{"Accept":"application/json"},cache:"no-store"});
     if(!response.ok) return;
     const data=await response.json();
     const update=(id,value)=>{if(typeof value==="string"&&value.trim()){document.getElementById(id).textContent=value.trim()}};
@@ -255,7 +382,7 @@ async function carregarInformacoesDoPainel(){
       document.getElementById("eventTimeRow").style.display="flex";
     }
   } catch(e) {
-    // Mantém o conteúdo provisório se o servidor estiver indisponível.
+    // Mantém o conteúdo padrão caso o arquivo esteja indisponível.
   }
 }
 carregarInformacoesDoPainel();
