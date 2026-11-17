@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#244b38">
-<meta name="description" content="Uma experiência encantada para a culminância teatral do Sítio do Picapau Amarelo.">
-<title>O Sítio do Picapau Amarelo — Uma Aventura Mágica</title>
+<meta name="description" content="Entre no mundo encantado do Sítio do Picapau Amarelo: descubra personagens, explore o mapa, jogue e encontre segredos!">
+<title>Sítio do Picapau Amarelo — Abra o Livro Encantado</title>
+<link rel="stylesheet" href="/static/encantamento.css">
+<script src="/static/encantamento.js" defer></script>
 <style>
 :root{--forest:#244b38;--forest2:#35664a;--leaf:#78965c;--gold:#f2c65b;--cream:#fff7e6;--paper:#f8ecd2;--ink:#3d3328;--clay:#b96d4e;--line:#e5d6b8;--shadow:0 18px 50px #1e3b2a18}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}button,input,textarea{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}a{color:inherit}button{cursor:pointer}.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:white;padding:10px;z-index:100}
@@ -18,23 +20,33 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </style>
 </head>
 <body>
+<div class="book-gate" id="bookGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
+  <div class="book-gate-inner">
+    <div class="book-cover"><span class="cover-badge" aria-hidden="true">📖</span><h2 id="gateTitle">Sítio do Picapau Amarelo</h2><p>Uma Aventura Mágica</p></div>
+    <p class="book-gate-intro">Psiu... há um livro mágico esperando por você! Prepare-se para entrar numa história cheia de aventuras.</p>
+    <div class="book-gate-actions"><button class="book-open-btn" type="button" id="openBook">✨ Abrir o livro</button><button class="book-skip-btn" type="button" id="skipBook">Pular abertura</button></div>
+  </div>
+</div>
+<div class="magic-tools" aria-label="Ferramentas mágicas"><button type="button" id="questToggle" aria-expanded="false" aria-controls="questPanel">🗝️ <span id="questTracker">Selos 0/4</span></button><button type="button" id="soundToggle" aria-pressed="false">♫ Ligar som</button><label for="soundVolume">Volume</label><input id="soundVolume" type="range" min="0" max="100" value="35" aria-label="Volume da melodia"></div>
+<aside class="quest-popover" id="questPanel" hidden aria-label="Coleção de selos mágicos"><h2>🗝️ Meu passaporte mágico</h2><p id="questResult">Encontre os quatro símbolos escondidos nas páginas do Sítio.</p><ul class="quest-stamps" id="stampList"></ul><button type="button" class="quest-close" id="questClose">Voltar à aventura</button></aside>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header>
   <nav class="nav" aria-label="Navegação principal">
     <a class="brand" href="#inicio"><span class="brand-mark">✿</span><span>Uma Viagem ao Sítio</span></a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
     <div class="nav-links" id="navLinks">
-      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#magia">Cantinho da magia</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
+      <a href="#personagens">Personagens</a><a href="#historia">A história</a><a href="#explorar">Mapa mágico</a><a href="#magia">Jogos</a><a href="#memorias">Memórias</a><a href="#creditos">Créditos</a>
     </div>
   </nav>
 </header>
 <main id="conteudo">
 <section class="hero" id="inicio">
+  <button class="collect-stamp" data-stamp="flor" type="button" aria-label="Descobrir selo: Flor da alegria">🌻</button>
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">Peça teatral escolar · <span id="schoolYear">6º ano</span></div>
+      <div class="eyebrow">Entre nessa história ✨</div>
       <h1><span id="playTitle">O Sítio do Picapau Amarelo</span> <em>Uma aventura mágica.</em></h1>
-      <p>Um pergaminho misterioso, uma floresta cheia de surpresas e uma aventura em que amizade e imaginação fazem toda a diferença.</p>
+      <p>Uma casa encantada, um pergaminho misterioso e muitas surpresas. Você está pronto para descobrir os segredos do Sítio?</p>
       <div class="actions"><a class="btn btn-gold" href="#personagens">✦ Entrar no Sítio</a><a class="btn btn-outline" href="#magia">Descobrir surpresas ↓</a></div>
     </div>
     <div class="hero-art" aria-label="Ilustração decorativa de uma casa amarela no campo" role="img">
@@ -45,12 +57,10 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section id="boas-vindas">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Entre, a casa é sua</div><h2>Tem sempre uma aventura esperando.</h2></div><p>Esta experiência foi criada para apresentar a aventura teatral do 6º ano, celebrando a imaginação, a amizade e a literatura brasileira.</p></div>
+    <div class="section-head"><div><div class="kicker">Entre, a casa é sua</div><h2>Tem sempre uma aventura esperando.</h2></div><p>Abra cada capítulo, conheça os moradores do Sítio e descubra quantas aventuras cabem em uma única história.</p></div>
     <div class="intro-grid">
-      <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Conheça os personagens do nosso espetáculo, descubra os mistérios do Sítio e divirta-se com jogos e segredos escondidos. A aventura está só começando!</p></article>
-      <article class="paper-card notice"><h3>Diário da culminância</h3><div class="notice-list">
-        <div class="notice-row"><div class="notice-icon">⏳</div><div><strong>Duração prevista</strong><small id="playDuration">30–40 minutos</small></div></div>
-        <div class="notice-row"><div class="notice-icon">🎨</div><div><strong>Gênero</strong><small id="playGenre">Comédia · Aventura · Fantasia</small></div></div>
+      <article class="paper-card welcome-card"><button class="collect-stamp" data-stamp="livro" type="button" aria-label="Descobrir selo: Livro da imaginação">📖</button><div class="kicker">Recado encantado</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Conheça os personagens do nosso espetáculo, descubra os mistérios do Sítio e divirta-se com jogos e segredos escondidos. A aventura está só começando!</p></article>
+      <article class="paper-card notice"><h3>Quando nos encontramos? ✨</h3><div class="notice-list">
         <div class="notice-row"><div class="notice-icon">📅</div><div><strong>Data da apresentação</strong><small id="eventDate">Em breve — data a confirmar</small></div></div>
         <div class="notice-row" id="eventTimeRow" style="display:none"><div class="notice-icon">🕒</div><div><strong>Horário da apresentação</strong><small id="eventTime"></small></div></div>
         <div class="notice-row"><div class="notice-icon">🎭</div><div><strong>Elenco e equipe</strong><small>Conheça as pessoas por trás da magia.</small></div></div>
@@ -61,19 +71,41 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section class="characters" id="personagens">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Conheça os 11 papéis previstos no roteiro, incluindo os dois narradores. Os nomes dos intérpretes serão divulgados quando forem confirmados.</p></div>
+    <div class="section-head"><div><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Toque em cada personagem para descobrir uma curiosidade. Quem será o seu favorito?</p></div>
     <div class="cards" id="characterGrid"></div>
   </div>
 </section>
 <section id="historia">
   <div class="wrap story-grid">
     <div class="book-illustration" role="img" aria-label="Ilustração decorativa de um livro mágico"><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✿</span><div class="open-book">📖</div></div>
-    <div class="story-copy"><div class="kicker">Era uma vez...</div><h2>Uma aventura mágica começa com um mistério.</h2><p id="storySynopsis">Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?</p><p>Uma comédia de aventura e fantasia sobre amizade, trabalho em equipe, leitura e o poder da imaginação.</p><div class="paper-card"><strong>Sobre a montagem</strong><p style="margin:8px 0 0">Adaptação escolar original inspirada no universo do <em>Sítio do Picapau Amarelo</em>. Duração estimada: 30–40 minutos.</p></div></div>
+    <div class="story-copy"><button class="collect-stamp" data-stamp="chave" type="button" aria-label="Descobrir selo: Chave da curiosidade">🗝️</button><div class="kicker">Era uma vez...</div><h2>Uma aventura mágica começa com um mistério.</h2><p id="storySynopsis">Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?</p><p>As melhores histórias começam quando alguém tem coragem de perguntar: “E se...?”</p><div class="paper-card"><strong>Desafio da imaginação ✨</strong><p style="margin:8px 0 0">Você conseguiria encontrar o caminho secreto? Explore o mapa e descubra!</p></div></div>
+  </div>
+</section>
+
+<section class="adventure" id="explorar">
+  <button class="collect-stamp" data-stamp="estrela" type="button" aria-label="Descobrir selo: Estrela da floresta">⭐</button>
+  <div class="wrap">
+    <div class="section-head"><div><div class="kicker">Capítulo secreto</div><h2>🗺️ Explore o mapa mágico!</h2></div><p>O Sítio está cheio de surpresas! Toque nos lugares do mapa e descubra o que existe em cada cantinho.</p></div>
+    <div class="adventure-layout">
+      <div class="adventure-map" aria-label="Mapa interativo do Sítio com quatro locais">
+        <button class="map-place" type="button" data-place="house" aria-pressed="true"><span aria-hidden="true">🏡</span>Casa de Dona Benta</button>
+        <button class="map-place" type="button" data-place="kitchen" aria-pressed="false"><span aria-hidden="true">🥧</span>Cozinha</button>
+        <button class="map-place" type="button" data-place="forest" aria-pressed="false"><span aria-hidden="true">🌳</span>Floresta</button>
+        <button class="map-place" type="button" data-place="path" aria-pressed="false"><span aria-hidden="true">🗝️</span>Caminho secreto</button>
+      </div>
+      <div class="map-info" aria-live="polite">
+        <span class="map-icon" id="mapIcon" aria-hidden="true">🏡</span>
+        <h3 id="mapTitle">A casa de Dona Benta</h3>
+        <p id="mapDescription">É aqui que as melhores conversas começam.</p>
+        <p class="map-hint" id="mapHint">Escolha um lugar no mapa!</p>
+        <a class="btn btn-dark" href="#magia">✨ Quero um desafio!</a>
+      </div>
+    </div>
   </div>
 </section>
 <section class="game-section" id="magia">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker" style="color:var(--gold)">Um pouco de encantamento</div><h2>O Cantinho da Magia</h2></div><p>Teste seus conhecimentos e encontre pequenos segredos escondidos pelo Sítio.</p></div>
+    <div class="section-head"><div><div class="kicker" style="color:var(--gold)">Venha brincar!</div><h2>O Cantinho da Magia</h2></div><p>Resolva desafios, descubra surpresas e mostre o quanto você conhece o Sítio!</p></div>
     <div class="game-grid">
       <article class="game-card">
         <div class="kicker">Desafio do Visconde</div><h3>Quiz do Sítio</h3><p>Responda às perguntas e veja quantos pontos consegue fazer.</p>
@@ -81,18 +113,25 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
       </article>
       <article class="game-card"><div class="kicker">Pssiu... um segredo!</div><h3>Objetos encantados</h3><p>Clique nos objetos para revelar mensagens escondidas.</p><div class="secret-list" id="secretList"></div><p style="margin:14px 0 0;color:#6c5e4b;font-size:.9rem" id="secretCount" aria-live="polite">0 de 3 segredos descobertos</p></article>
     </div>
+
+    <div class="magic-memory">
+      <div class="kicker">Desafio do Visconde</div><h3>🃏 Jogo da memória encantada</h3>
+      <p>Encontre as duas cartas iguais! Vire uma carta, memorize e descubra todos os pares.</p>
+      <div class="memory-head"><strong id="memoryMoves">Jogadas: 0</strong><button class="memory-restart" id="memoryRestart" type="button">🔄 Jogar de novo</button></div>
+      <div id="memoryBoard" class="memory-board" aria-label="Cartas do jogo da memória"></div>
+      <p class="memory-status" id="memoryStatus" role="status" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 <section class="gallery" id="memorias">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. Esta galeria está pronta para receber os registros autorizados.</p></div>
+    <div class="section-head"><div><div class="kicker">O que fica para sempre</div><h2>Nossas memórias</h2></div><p>Ensaios, bastidores, cenários e os momentos especiais da apresentação. As lembranças da apresentação vão fazer parte deste livro encantado.</p></div>
     <div class="gallery-grid">
       <article class="paper-card gallery-tile"><span class="big-emoji">🎬</span><h3>Bastidores</h3><p>Os preparativos e os ensaios da turma.</p></article>
       <article class="paper-card gallery-tile"><span class="big-emoji">🎨</span><h3>Cenários e figurinos</h3><p>As ideias que deram vida ao palco.</p></article>
       <article class="paper-card gallery-tile"><span class="big-emoji">🌟</span><h3>Dia da apresentação</h3><p>Os registros da nossa culminância.</p></article>
     </div>
-    <div class="paper-card gallery-upload"><div><strong>Pré-visualizar arquivos</strong><p>Escolha imagens ou vídeos para ver como ficam nesta página.</p><small>Esta prévia é local: os arquivos não são enviados nem salvos no site.</small></div><label class="upload-label">＋ Selecionar arquivos<input id="galleryFiles" type="file" accept="image/*,video/*" multiple></label></div>
-    <div class="preview-grid" id="previewGrid" aria-live="polite"></div>
+    <div class="paper-card gallery-note">🌟 Novas lembranças mágicas chegarão aqui. Continue explorando os capítulos e descobrindo segredos!</div>
   </div>
 </section>
 <section id="creditos">
@@ -107,7 +146,7 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section class="closing"><div class="wrap"><div class="kicker">Até a próxima aventura</div><h2>Obrigado por visitar nosso Sítio!</h2><p>Que a magia das histórias continue muito depois que as cortinas se fecharem. Esta página é uma lembrança coletiva do nosso trabalho e da nossa imaginação.</p><a class="btn btn-dark" href="#inicio">Voltar ao começo ↑</a></div></section>
 </main>
-<footer><div class="footer-inner"><p>✿ <strong>Uma Viagem ao Sítio</strong> · Site da culminância teatral</p><p>Projeto escolar inspirado no universo do <em>Sítio do Picapau Amarelo</em>. <span id="year"></span></p></div></footer>
+<footer><div class="footer-inner"><p>✿ <strong>Uma Viagem ao Sítio</strong> · Onde a imaginação ganha vida</p><p>Projeto escolar inspirado no universo do <em>Sítio do Picapau Amarelo</em>. <span id="year"></span></p></div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 /* CONTEÚDO EDITÁVEL: atualize nomes, descrições, intérpretes, data e local neste bloco. */
@@ -150,9 +189,6 @@ async function carregarInformacoesDoPainel(){
     const data=await response.json();
     const update=(id,value)=>{if(typeof value==="string"&&value.trim()){document.getElementById(id).textContent=value.trim()}};
     update("playTitle",data.play_title);
-    update("schoolYear",data.school_year);
-    update("playDuration",data.duration);
-    update("playGenre",data.genre);
     update("welcomeMessage",data.welcome);
     update("storySynopsis",data.synopsis);
     update("eventDate",data.event_date);
@@ -188,8 +224,7 @@ function renderQuestion(){quizAnswered=false;const item=siteContent.quiz[quizInd
 function answerQuestion(i,button){if(quizAnswered)return;quizAnswered=true;const item=siteContent.quiz[quizIndex];[...qAnswers.children].forEach((b,j)=>{b.disabled=true;if(j===item.correct)b.classList.add("correct")});if(i===item.correct){quizScore++;qFeedback.textContent="Isso mesmo! "+item.why}else{button.classList.add("wrong");qFeedback.textContent=item.why}qProgress.textContent=`Pergunta ${quizIndex+1} de ${siteContent.quiz.length} · Pontos: ${quizScore}`;qStart.disabled=false;}
 qStart.addEventListener("click",()=>{if(!quizStarted){quizStarted=true;quizIndex=0;quizScore=0;qStart.disabled=true;renderQuestion();return}if(!quizAnswered)return;if(quizIndex<siteContent.quiz.length-1){quizIndex++;renderQuestion()}else{qQuestion.textContent=`Você fez ${quizScore} de ${siteContent.quiz.length} pontos!`;qAnswers.innerHTML="";qFeedback.textContent=quizScore===siteContent.quiz.length?"Uma verdadeira enciclopédia do Sítio!":quizScore>=3?"Muito bem! Continue explorando o universo do Sítio.":"Toda aventura é uma chance de aprender algo novo. Tente novamente!";qProgress.textContent="Quiz concluído";qStart.textContent="Jogar novamente";qStart.disabled=false;quizStarted=false;const restart=()=>{quizIndex=0;quizScore=0;quizStarted=true;qStart.removeEventListener("click",restart);renderQuestion()};qStart.addEventListener("click",restart,{once:true})}});
 qStart.textContent="Começar quiz";qStart.disabled=false;
-const fileInput=document.getElementById("galleryFiles"),previewGrid=document.getElementById("previewGrid");let previewUrls=[];
-fileInput.addEventListener("change",()=>{previewUrls.forEach(URL.revokeObjectURL);previewUrls=[];previewGrid.innerHTML="";[...fileInput.files].slice(0,12).forEach(file=>{const url=URL.createObjectURL(file);previewUrls.push(url);let media;if(file.type.startsWith("video/")){media=document.createElement("video");media.controls=true;media.src=url}else if(file.type.startsWith("image/")){media=document.createElement("img");media.src=url;media.alt=file.name}else{return}media.title=file.name;previewGrid.appendChild(media)});if(fileInput.files.length>12)showToast("A prévia mostra até 12 arquivos por vez.");if(fileInput.files.length)showToast("Prévia local criada. Nada foi enviado ao servidor.")});
+/* Galeria preparada para receber registros autorizados em breve. */
 const menuToggle=document.getElementById("menuToggle"),navLinks=document.getElementById("navLinks");menuToggle.addEventListener("click",()=>{const open=navLinks.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open))});navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{navLinks.classList.remove("open");menuToggle.setAttribute("aria-expanded","false")}));
 let toastTimer;function showToast(message){const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600)}
 </script>
