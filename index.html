@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#244b38">
 <meta name="description" content="Uma experiência encantada para a culminância teatral do Sítio do Picapau Amarelo.">
-<title>Uma Viagem ao Sítio — Culminância Teatral</title>
+<title>O Sítio do Picapau Amarelo — Uma Aventura Mágica</title>
 <style>
 :root{--forest:#244b38;--forest2:#35664a;--leaf:#78965c;--gold:#f2c65b;--cream:#fff7e6;--paper:#f8ecd2;--ink:#3d3328;--clay:#b96d4e;--line:#e5d6b8;--shadow:0 18px 50px #1e3b2a18}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}button,input,textarea{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}a{color:inherit}button{cursor:pointer}.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:white;padding:10px;z-index:100}
@@ -32,9 +32,9 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 <section class="hero" id="inicio">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">Culminância teatral · Projeto escolar</div>
-      <h1>Um mundo de histórias. <em>Um sítio de magia.</em></h1>
-      <p>Abra as porteiras da imaginação e venha conhecer o universo da nossa apresentação inspirada no Sítio do Picapau Amarelo.</p>
+      <div class="eyebrow">Peça teatral escolar · <span id="schoolYear">6º ano</span></div>
+      <h1><span id="playTitle">O Sítio do Picapau Amarelo</span> <em>Uma aventura mágica.</em></h1>
+      <p>Um pergaminho misterioso, uma floresta cheia de surpresas e uma aventura em que amizade e imaginação fazem toda a diferença.</p>
       <div class="actions"><a class="btn btn-gold" href="#personagens">✦ Entrar no Sítio</a><a class="btn btn-outline" href="#magia">Descobrir surpresas ↓</a></div>
     </div>
     <div class="hero-art" aria-label="Ilustração decorativa de uma casa amarela no campo" role="img">
@@ -45,10 +45,12 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section id="boas-vindas">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Entre, a casa é sua</div><h2>Tem sempre uma aventura esperando.</h2></div><p>Este cantinho foi criado pela nossa turma para celebrar teatro, imaginação e as histórias que ganham vida quando estamos juntos.</p></div>
+    <div class="section-head"><div><div class="kicker">Entre, a casa é sua</div><h2>Tem sempre uma aventura esperando.</h2></div><p>Esta experiência foi criada para apresentar a aventura teatral do 6º ano, celebrando a imaginação, a amizade e a literatura brasileira.</p></div>
     <div class="intro-grid">
-      <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Por aqui você pode conhecer os personagens, descobrir quem dá vida a eles, brincar com um quiz e guardar um pedacinho dessa experiência. Algumas informações ainda serão preenchidas quando os detalhes da peça forem definidos.</p></article>
+      <article class="paper-card welcome-card"><div class="kicker">Uma mensagem da turma</div><h3>O palco é só o começo!</h3><p id="welcomeMessage">Conheça os personagens do nosso espetáculo, descubra os mistérios do Sítio e divirta-se com jogos e segredos escondidos. A aventura está só começando!</p></article>
       <article class="paper-card notice"><h3>Diário da culminância</h3><div class="notice-list">
+        <div class="notice-row"><div class="notice-icon">⏳</div><div><strong>Duração prevista</strong><small id="playDuration">30–40 minutos</small></div></div>
+        <div class="notice-row"><div class="notice-icon">🎨</div><div><strong>Gênero</strong><small id="playGenre">Comédia · Aventura · Fantasia</small></div></div>
         <div class="notice-row"><div class="notice-icon">📅</div><div><strong>Data da apresentação</strong><small id="eventDate">Em breve — data a confirmar</small></div></div>
         <div class="notice-row" id="eventTimeRow" style="display:none"><div class="notice-icon">🕒</div><div><strong>Horário da apresentação</strong><small id="eventTime"></small></div></div>
         <div class="notice-row"><div class="notice-icon">🎭</div><div><strong>Elenco e equipe</strong><small>Conheça as pessoas por trás da magia.</small></div></div>
@@ -59,14 +61,14 @@ header{position:sticky;top:0;z-index:20;background:#fff7e6ed;backdrop-filter:blu
 </section>
 <section class="characters" id="personagens">
   <div class="wrap">
-    <div class="section-head"><div><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Conheça alguns moradores queridos do universo de Monteiro Lobato. Os intérpretes serão atualizados assim que o elenco estiver definido.</p></div>
+    <div class="section-head"><div><div class="kicker">Quem mora por aqui?</div><h2>Personagens do Sítio</h2></div><p>Conheça os 11 papéis previstos no roteiro, incluindo os dois narradores. Os nomes dos intérpretes serão divulgados quando forem confirmados.</p></div>
     <div class="cards" id="characterGrid"></div>
   </div>
 </section>
 <section id="historia">
   <div class="wrap story-grid">
     <div class="book-illustration" role="img" aria-label="Ilustração decorativa de um livro mágico"><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✿</span><div class="open-book">📖</div></div>
-    <div class="story-copy"><div class="kicker">Era uma vez...</div><h2>Uma história que ainda está sendo escrita.</h2><p id="storySynopsis">O enredo oficial da nossa peça será colocado aqui quando a turma definir a adaptação e os acontecimentos da apresentação.</p><p>Enquanto isso, este espaço apresenta o propósito do projeto: celebrar a imaginação, a leitura, o trabalho coletivo e a magia de contar histórias no palco.</p><div class="paper-card"><strong>Nota da produção</strong><p style="margin:8px 0 0">Texto provisório — substitua este conteúdo pelo resumo oficial. Evite publicar spoilers que tirem a surpresa de quem vai assistir!</p></div></div>
+    <div class="story-copy"><div class="kicker">Era uma vez...</div><h2>Uma aventura mágica começa com um mistério.</h2><p id="storySynopsis">Um dia tranquilo no Sítio muda quando Narizinho e Pedrinho encontram um pergaminho misterioso perto da floresta. Ao lado de Emília e Visconde, eles partem em busca de respostas e encontram personagens inesperados pelo caminho. Mas o que será preciso para desvendar esse segredo?</p><p>Uma comédia de aventura e fantasia sobre amizade, trabalho em equipe, leitura e o poder da imaginação.</p><div class="paper-card"><strong>Sobre a montagem</strong><p style="margin:8px 0 0">Adaptação escolar original inspirada no universo do <em>Sítio do Picapau Amarelo</em>. Duração estimada: 30–40 minutos.</p></div></div>
   </div>
 </section>
 <section class="game-section" id="magia">
@@ -113,16 +115,19 @@ const siteContent = {
   eventDate: "Em breve — data a confirmar",
   eventPlace: "A confirmar pela escola",
   characters: [
-    {name:"Emília", role:"A boneca falante", emoji:"🪆", description:"Criativa, espontânea e cheia de opiniões. Suas ideias costumam transformar qualquer situação em aventura.", actor:"Intérprete a confirmar"},
-    {name:"Narizinho", role:"A menina curiosa", emoji:"🌷", description:"Carinhosa e imaginativa, está sempre pronta para descobrir algo novo no mundo ao seu redor.", actor:"Intérprete a confirmar"},
-    {name:"Pedrinho", role:"O aventureiro", emoji:"🧭", description:"Corajoso e curioso, adora explorar, inventar brincadeiras e participar de grandes aventuras.", actor:"Intérprete a confirmar"},
-    {name:"Visconde de Sabugosa", role:"O sábio do Sítio", emoji:"🌽", description:"Estudioso e inteligente, gosta de livros, experiências e de explicar como as coisas funcionam.", actor:"Intérprete a confirmar"},
-    {name:"Dona Benta", role:"A contadora de histórias", emoji:"📚", description:"Sábia e acolhedora, compartilha histórias e conhecimentos com todos ao seu redor.", actor:"Intérprete a confirmar"},
-    {name:"Tia Nastácia", role:"A cozinheira habilidosa", emoji:"🥧", description:"Afetuosa e talentosa, é conhecida por suas habilidades na cozinha e por cuidar da família do Sítio.", actor:"Intérprete a confirmar"},
-    {name:"Saci", role:"O personagem travesso", emoji:"🍃", description:"Figura do folclore brasileiro, conhecido por suas travessuras e seu jeito brincalhão.", actor:"Participação a confirmar"},
-    {name:"Cuca", role:"A personagem misteriosa", emoji:"🐊", description:"Uma figura fantástica do universo do Sítio, cercada de mistério e histórias surpreendentes.", actor:"Participação a confirmar"}
+    {"name":"Narrador(a) 1","role":"Quem inicia a aventura","emoji":"📖","description":"Apresenta o Sítio e conduz os primeiros momentos da história.","actor":"Intérprete a confirmar"},
+    {"name":"Narrador(a) 2","role":"Quem acompanha os acontecimentos","emoji":"🎙️","description":"Ajuda a contar as descobertas e os encontros da aventura.","actor":"Intérprete a confirmar"},
+    {"name":"Dona Benta","role":"A avó do Sítio","emoji":"📚","description":"Recebe a família no Sítio e compartilha palavras importantes sobre a leitura e a imaginação.","actor":"Intérprete a confirmar"},
+    {"name":"Tia Nastácia","role":"A dona das delícias","emoji":"🥧","description":"Cuida do Sítio, desconfia das aventuras na floresta e não deixa faltar bom humor.","actor":"Intérprete a confirmar"},
+    {"name":"Narizinho","role":"A menina curiosa","emoji":"🌷","description":"Encontra um mistério perto da floresta e decide descobrir o que ele esconde.","actor":"Intérprete a confirmar"},
+    {"name":"Pedrinho","role":"O aventureiro","emoji":"🧭","description":"Encontra o pergaminho e embarca na busca por suas respostas.","actor":"Intérprete a confirmar"},
+    {"name":"Emília","role":"A boneca investigadora","emoji":"🪆","description":"Curiosa e cheia de ideias, usa a imaginação para enfrentar os desafios.","actor":"Intérprete a confirmar"},
+    {"name":"Visconde de Sabugosa","role":"O cientista leitor","emoji":"🌽","description":"Traz livros, explicações e muita lógica para a aventura.","actor":"Intérprete a confirmar"},
+    {"name":"Rabicó","role":"O faminto do Sítio","emoji":"🐷","description":"Entra em cena sempre pronto para falar de comida e arrancar risadas.","actor":"Intérprete a confirmar"},
+    {"name":"Saci","role":"O travesso da floresta","emoji":"🍃","description":"Surge de surpresa e conhece os segredos escondidos na floresta.","actor":"Intérprete a confirmar"},
+    {"name":"Cuca","role":"A bruxa misteriosa","emoji":"🐊","description":"Aparece em busca da magia do Sítio e desafia os aventureiros.","actor":"Intérprete a confirmar"}
   ],
-  quiz: [
+    quiz: [
     {q:"Quem é a boneca de pano conhecida por falar bastante e ter opiniões fortes?",a:["Narizinho","Emília","Dona Benta","Cuca"],correct:1,why:"Emília é a boneca de pano falante, famosa por sua personalidade espontânea."},
     {q:"Qual personagem é conhecido por gostar muito de estudar e de livros?",a:["Visconde de Sabugosa","Saci","Pedrinho","Tia Nastácia"],correct:0,why:"Visconde é retratado como estudioso e apaixonado por conhecimento."},
     {q:"Qual destas figuras faz parte do folclore brasileiro e é conhecida por suas travessuras?",a:["Dona Benta","Narizinho","Saci","Visconde"],correct:2,why:"O Saci é uma figura conhecida do folclore brasileiro."},
@@ -144,6 +149,10 @@ async function carregarInformacoesDoPainel(){
     if(!response.ok) return;
     const data=await response.json();
     const update=(id,value)=>{if(typeof value==="string"&&value.trim()){document.getElementById(id).textContent=value.trim()}};
+    update("playTitle",data.play_title);
+    update("schoolYear",data.school_year);
+    update("playDuration",data.duration);
+    update("playGenre",data.genre);
     update("welcomeMessage",data.welcome);
     update("storySynopsis",data.synopsis);
     update("eventDate",data.event_date);
