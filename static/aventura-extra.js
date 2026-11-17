@@ -22,6 +22,7 @@
   objects.forEach(button=>button.addEventListener("click",()=>{
     found.add(button.dataset.object);
     updateObjects();
+    if(found.size===objects.length)document.dispatchEvent(new CustomEvent("sitio:conquista",{detail:"objetos"}));
   }));
   byId("objectRestart")?.addEventListener("click",()=>{
     found.clear();
@@ -80,6 +81,7 @@
       setDialogue("📖","Narradores","E assim, com muitas ideias e imaginação, sua aventura continua! Que tal visitar outros cantinhos do Sítio?");
       if(result){result.hidden=false;result.textContent="🌟 Missão concluída! Você mostrou que uma boa história fica ainda melhor com curiosidade e amizade.";}
       if(restart)restart.hidden=false;
+      document.dispatchEvent(new CustomEvent("sitio:conquista",{detail:"dialogo"}));
       return;
     }
     const step=steps[stage];
