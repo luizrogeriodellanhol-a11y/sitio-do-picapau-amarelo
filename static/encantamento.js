@@ -20,6 +20,11 @@
     if (entry) entry.focus({preventScroll:true});
   };
   if (gate) {
+    $("reopenBook")?.addEventListener("click",()=>{
+      gate.classList.remove("is-opening");gate.hidden=false;
+      document.body.classList.add("gate-open");
+      $("openBook")?.focus({preventScroll:true});
+    });
     let alreadyOpened = false;
     try { alreadyOpened = sessionStorage.getItem("sitio-book-opened") === "1"; } catch (_) {}
     if (!alreadyOpened) {
@@ -103,12 +108,12 @@
   const memoryState=$("memoryStatus");
   const memoryMoves=$("memoryMoves");
   const symbols=["🪆","🌽","📖","🍃","🐷","🏡"];
-  let first=null, second=null, locked=false, moves=0, pairs=0;
+  let first=null, second=null, locked=false, moves=0, pairs=0, memoryGameId=0;
   const setMemoryStatus=(text)=>{if(memoryState)memoryState.textContent=text;};
   const newMemoryGame=()=>{
     if(!board)return;
     board.replaceChildren();
-    first=null;second=null;locked=false;moves=0;pairs=0;
+    memoryGameId++;first=null;second=null;locked=false;moves=0;pairs=0;
     memoryMoves.textContent="Jogadas: 0";
     setMemoryStatus("Encontre os 6 pares encantados!");
     const deck=symbols.concat(symbols);
@@ -127,10 +132,12 @@
           first.disabled=true;second.disabled=true;pairs++;
           first=null;second=null;
           setMemoryStatus(pairs===symbols.length?"🎉 Você encontrou todos os pares!":"Muito bem! "+pairs+" de 6 pares encontrados.");
+          if(pairs===symbols.length)document.dispatchEvent(new CustomEvent("sitio:conquista",{detail:"memoria"}));
         }else{
           locked=true;setMemoryStatus("Quase! Observe e tente outra vez.");
-          const a=first,c=second;
+          const a=first,c=second,gameId=memoryGameId;
           window.setTimeout(()=>{
+            if(gameId!==memoryGameId)return;
             a.classList.remove("is-up");c.classList.remove("is-up");
             a.textContent="✦";c.textContent="✦";
             a.setAttribute("aria-label","Carta fechada");c.setAttribute("aria-label","Carta fechada");
@@ -183,6 +190,7 @@
     collected[id]=true;
     try{localStorage.setItem("sitio-selos-v1",JSON.stringify(collected));}catch(_){}
     renderStamps();
+    if(Object.keys(stampInfo).every(k=>collected[k]))document.dispatchEvent(new CustomEvent("sitio:conquista",{detail:"selos"}));
     if(questPanel)questPanel.hidden=false;
     if(typeof showToast==="function")showToast("Você encontrou um selo mágico! ✨");
   }));
