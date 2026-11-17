@@ -92,3 +92,12 @@ footer{padding-bottom:92px}
 @media(max-width:900px){.gaming-grid,.discovery-grid{grid-template-columns:1fr}.badge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.gaming-grid{gap:16px}.minigame{padding:18px}.magic-compass{grid-template-columns:repeat(2,minmax(0,1fr))}.shadow-choices{grid-template-columns:1fr}.badge-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.achievement{min-height:150px;padding:14px 8px}.back-top{left:9px;bottom:86px}.reading-tools{gap:7px;padding:10px}.reading-tools button{padding:9px 10px}.reading-tools .reading-hint{display:none}.puzzle-tiles{width:min(320px,100%)}}
 @media print{.nav,.magic-tools,.reading-tools,.back-top,.book-gate,.scroll-progress,.new-challenge,.gaming-zone,.badge-actions{display:none!important}body{background:#fff;color:#000}.badge-zone{background:#fff;color:#000}.badge-zone h2{color:#000!important}.achievement{break-inside:avoid}}
+
+/* A navegação permanece utilizável em celulares pequenos mesmo com muitos capítulos. */
+@media(max-width:620px){
+  .nav-links.open{max-height:calc(100dvh - 76px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:24px;box-shadow:0 12px 24px #1a402833}
+  .nav-links a{font-size:1rem;min-height:45px;display:flex;align-items:center;padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-progress,.word-letters button,.guide-choice,.shadow-figure span{transition:none!important}
+}
